@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Flat {{flat.code}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  
+  <ion-grid>
+    
+    <ion-row>
+      <ion-col size="10" offset="0">
+        <h3>Enxovais</h3>
+      </ion-col>
+
+      <ion-col size="2" class="add-trousseau-link" >
+        <ion-router-link color="primary" [href]="'/flat/' + flat.code + '/trousseau'" >Adicionar Enxoval</ion-router-link>
+      </ion-col>
+      
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col>
+        <ion-list>
+    
+          <ion-item *ngFor="let trousseau of trousseaus" >
+      
+            <ion-grid>
+      
+              <ion-row>
+                
+                <ion-col>
+                  
+                  <ion-label> 
+                    <iont-text>
+                      <h2>{{trousseau.id.toString().padStart(5, '0') }}</h2>
+                    </iont-text>
+                  </ion-label>
+      
+                </ion-col>
+                
+                <ion-col>
+                  
+                  <ion-text>
+                    {{trousseau.date |date: 'dd/MM/yyyy'}}
+                  </ion-text>
+      
+                </ion-col>
+      
+              </ion-row>
+              
+              <ion-row>
+      
+                <ion-col>
+                  <ion-text>
+                    {{getLabel(trousseau.status)}}
+                  </ion-text>
+                </ion-col>
+      
+                <ion-col>
+                  <ion-router-link color="primary" [href]="'/trousseau/' + trousseau.id">{{getViewButtonLabel(trousseau)}}</ion-router-link>
+                </ion-col>
+      
+              </ion-row>
+      
+            </ion-grid>
+      
+      
+          </ion-item>
+        
+        </ion-list>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

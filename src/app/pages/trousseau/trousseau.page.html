@@ -1,0 +1,196 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="large">Enxoval</ion-title>
+    <ion-buttons slot="end">
+
+      <ion-button (click)="report()" *ngIf="isInitiated">
+        <ion-icon size="large" name="download"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-title size="medium" slot="start" >Flat: {{flatCode}}</ion-title>
+    <ion-title size="medium" slot="end" >{{statusMessage}}</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+
+    <ion-row>
+      
+      <ion-col>
+        
+        <ion-list-title>
+          Itens
+        </ion-list-title>
+
+        <ng-container *ngTemplateOutlet="currentTemplateList">
+
+        </ng-container>
+
+        <ng-template #validationItensList >
+          
+          <ng-select [items]="itens" (change)="addValidationItem($event)">
+
+            <ng-template ng-label-tmp ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+  
+              {{item.name}} - {{item.value | currency: 'BRL'}}
+  
+            </ng-template>
+  
+          </ng-select>
+
+          <ion-list>
+
+            <ion-item *ngFor="let item of selectedValiationsItens">
+  
+              <ion-label>
+                <h2>{{item.name}}</h2>
+                <p>{{item.value | currency: 'BRL'}} </p>
+              </ion-label>
+  
+              <div class="item-quantity-container">
+                <ion-button size="small" (click)="removeValidationItem(item)" >-</ion-button>
+                <h3> {{getQuantityOfValidationItem(item)}}</h3>
+                <ion-button size="small" (click)="addValidationItem(item)" >+</ion-button>
+              </div>
+  
+            </ion-item>
+  
+          </ion-list>
+
+        </ng-template>
+
+        <ng-template #itensList>
+          
+          <ng-select [items]="itens" (change)="addItem($event)" *ngIf="editionEnabled" >
+
+            <ng-template ng-label-tmp ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+  
+              {{item.name}} - {{item.value | currency: 'BRL'}}
+  
+            </ng-template>
+  
+          </ng-select>
+
+          <ion-list>
+
+            <ion-item *ngFor="let item of selectedItens">
+  
+              <ion-label>
+                <h2>{{item.name}}</h2>
+                <p>{{item.value | currency: 'BRL'}} </p>
+              </ion-label>
+  
+              <div class="item-quantity-container">
+                <ion-button size="small" (click)="removeItem(item)" *ngIf="editionEnabled" >-</ion-button>
+                <h3> {{getQuantityOfItem(item)}}</h3>
+                <ion-button size="small" (click)="addItem(item)" *ngIf="editionEnabled" >+</ion-button>
+              </div>
+  
+            </ion-item>
+  
+          </ion-list>
+
+        </ng-template>
+
+        <ng-template #incosistentItensList>
+          <ion-list>
+
+            <ion-item *ngFor="let item of selectedItens">
+  
+              <ion-label>
+                <h2>{{item.name}}</h2>
+                <p>{{item.value | currency: 'BRL'}} </p>
+              </ion-label>
+  
+              <div class="item-quantity-container">
+                
+                <h3> {{ hasDiff(item) ? getDiff(item) : '' }} </h3>
+
+                <h3> {{getQuantityOfItem(item)}}</h3>
+                
+              </div>
+  
+            </ion-item>
+  
+          </ion-list>
+        </ng-template>
+
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="actions-container" *ngIf="!isFinished" >
+      
+      <ng-container *ngTemplateOutlet="currentActions" >
+
+      </ng-container>
+
+      <ng-template #inicialActions >
+        
+        <ion-col>
+          <ion-button color="medium" size="large" expand="full" (click)="cancelRegister()" >CANCELAR</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="primary" size="large" expand="full" (click)="initTrousseau()" [disabled]="isEmpty" >OK</ion-button>
+        </ion-col>
+
+      </ng-template>
+
+      <ng-template #sendActions >
+        
+        <ion-col>
+          <ion-button color="medium" size="large" expand="full" (click)="cancelInit()" >VOLTAR</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="primary" size="large" expand="full" (click)="sendTrousseau()" >ENVIAR</ion-button>
+        </ion-col>
+
+      </ng-template>
+
+      <ng-template #retrieveActions >
+        
+        <ion-col>
+          <ion-button color="medium" size="large" expand="full" (click)="invalidateTrosseau()" >EXTRAVÍADA</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="primary" size="large" expand="full" (click)="retrieveTrousseau()" >RECEBER</ion-button>
+        </ion-col>
+
+      </ng-template>
+
+      <ng-template #validateActions >
+        
+        <ion-col>
+          <ion-button color="primary" size="large" expand="full" (click)="validateTrousseau()" >ENCERRAR</ion-button>
+        </ion-col>
+
+      </ng-template>
+
+    </ion-row>
+
+    <ion-row class="total-container">
+      
+      <ion-col>
+        <ion-text>
+          <h2>Total</h2>
+        </ion-text>
+      </ion-col>
+      
+      <ion-col>
+        <ion-text>
+          <h2 class="total-count" >{{total | currency : 'BRL'}}</h2>
+        </ion-text>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,43 @@
+.item-quantity-container
+{
+    display: contents;
+    justify-content: space-between;
+    width: 5rem;
+
+    h3, button
+    {
+        margin: 1rem;
+    }
+}
+
+
+.total-container
+{
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+    padding: 0 1rem 0 0.5rem;
+    
+    ion-text
+    {
+        padding:1rem;
+        
+        .total-count
+        {
+            text-align: right;
+        }
+    }
+}
+
+.actions-container + .total-container
+{
+    bottom: 78px;
+}
+
+.actions-container
+{
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+}
+

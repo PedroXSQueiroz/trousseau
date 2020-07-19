@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>flats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-card *ngFor="let flat of flats">
+
+      <ion-card-content>
+        <ion-grid>
+          
+          <ion-row>
+
+            <ion-col>
+              <ion-text> <h2> Flat {{flat.code}} </h2> </ion-text>
+            </ion-col>
+            
+            <ion-col>
+              <ion-router-link color="primary" [href]="'/flat/' + flat.code">Enxovais</ion-router-link>
+            </ion-col>
+            
+            <ion-col>
+              <ion-router-link color="primary" [href]="'/flat/' + flat.code + '/trousseau'">Novo Enxoval</ion-router-link>
+            </ion-col>
+
+          </ion-row>
+
+          <!-- <ion-row>
+
+            <ion-col>
+              <ion-text> Útimo Enxoval: 10/10/2020 </ion-text>
+            </ion-col>
+
+            <ion-col>
+              <ion-router-link color="primary" [href]="'/flat/' + flat.code + '/trousseau'">Continuar</ion-router-link>
+            </ion-col>
+
+          </ion-row> -->
+          
+
+        </ion-grid>
+      </ion-card-content>
+
+    </ion-card>
+
+  </ion-list>
+
+</ion-content>

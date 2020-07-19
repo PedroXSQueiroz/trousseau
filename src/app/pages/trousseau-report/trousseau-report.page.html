@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Canhoto</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="print()">
+        <ion-icon size="large" name="print-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="report">
+
+    <style>
+      
+      .report-container .header
+      {
+          background: #999999;
+          border: solid 1px #000000;
+      }
+
+      .report-container .flat-row
+      {
+
+          width: 100%;
+          top: 0;
+          justify-content: center;
+          display: flex;
+          justify-content: center;  
+      }
+
+      .report-container .flat-row h2
+      {
+          width: fit-content;
+      }
+
+      .report-container table
+      {
+        width: 100%;
+      }
+
+      .report-container table tbody tr td.value div
+      {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .report-container table tbody tr td.value.empty
+      {
+        text-align: right;
+      }
+      
+      .report-container
+      {
+          
+        padding: 3rem;
+        position: relative;
+
+      }
+
+      .report-container tbody tr.last-line td:empty
+      {
+        visibility: hidden;
+      }
+
+      .report-container .header.flat-row + table
+      {
+        margin-top: 2rem;
+      }
+
+      td
+      {
+          padding: 0.5rem;
+          border-bottom: solid 1px #000000;
+          border-left: solid 1px #000000;
+      }
+
+      td + td:not(:last-child)
+      {
+          border-left: solid 1px #000000;
+          border-right: none;
+          border-bottom: solid 1px #000000;
+      }
+
+      td:last-child
+      {
+          border-left: solid 1px #000000;
+          border-bottom: solid 1px #000000;
+          border-right: solid 1px #000000;
+      }
+
+    </style>
+
+    <div class="report-container">
+      <div class="flat-row header" > 
+        <h2>{{trousseau.flat.code}}</h2> 
+      </div>
+      
+      <table>
+    
+        <thead>
+    
+          <tr class="header" >     
+            <td> Data </td>
+            <td> Enxoval </td>
+            <td> QTD </td>
+            <td> Custo </td>      
+          </tr>
+    
+        </thead>
+    
+        <tbody>    
+  
+          
+          <tr *ngFor="let item of itens; let i = index" >
+            
+            <td *ngIf="i == 0" [attr.rowspan]="itens.length" > {{trousseau.date | date: 'dd/MM/yyyy' }} </td>
+  
+            <td>{{item.name}}</td>
+  
+            <td *ngIf="getQuantity(item) === 0" class="qtd empty"> </td>
+            <td *ngIf="getQuantity(item) > 0" >{{getQuantity(item)}}</td>
+  
+            <td *ngIf="getQuantity(item) === 0" class="value empty"> --- </td>
+            <td *ngIf="getQuantity(item) > 0" class="value"> 
+              <div>
+                <span>R$</span> <span> {{ getTotalValueItem(item).toFixed(2)}} </span>
+              </div>
+            </td>
+  
+          </tr>
+  
+          <tr class="last-line">
+  
+            <td></td>
+  
+            <td></td>
+  
+            <td> Total: </td>
+  
+            <td class="value" > 
+              <div>
+                <span>R$</span> <span> {{ trousseau.total.toFixed(2)}} </span>
+              </div>
+          </tr>
+    
+        </tbody>
+    
+      </table>
+  
+    </div>
+    
+  </div>
+ 
+
+</ion-content>

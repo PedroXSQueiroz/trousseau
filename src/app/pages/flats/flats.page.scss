@@ -1,0 +1,42 @@
+ion-list{
+
+    ion-card{
+
+        ion-card-content{
+
+            ion-grid{
+
+                ion-row{
+
+                    ion-col{
+                        
+                        ion-router-link{
+                
+                            display: flex;
+                            width: 100%;
+                            justify-content: center;
+                
+                        }
+
+                    }
+
+                    ion-col:last-child{
+                        
+                        ion-router-link{
+                            display: flex;
+                            width: 100%;
+                            justify-content: flex-end;
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
+

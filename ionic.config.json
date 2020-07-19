@@ -1,5 +1,7 @@
 {
   "name": "trousseau",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
