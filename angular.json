@@ -66,6 +66,23 @@
                 }
               ]
             },
+            "heroku": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.heroku.ts"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false
+            },
             "ci": {
               "progress": false
             }
@@ -156,6 +173,9 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
+            },
+            "heroku":{
+              "browserTarget": "app:build:heroku"
             }
           }
         },
@@ -169,6 +189,9 @@
             "production": {
               "cordovaBuildTarget": "app:ionic-cordova-build:production",
               "devServerTarget": "app:serve:production"
+            },
+            "heroku":{
+              "browserTarget": "app:build:heroku"
             }
           }
         }

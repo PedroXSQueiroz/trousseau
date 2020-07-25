@@ -7,6 +7,7 @@ import { NavController } from '@ionic/angular';
 import { __spreadArrays } from 'tslib';
 import { IfStmt } from '@angular/compiler';
 import { TrousseauService } from 'src/app/services/trousseau.service';
+import FlatItem from 'src/app/dtos/flat-item';
 
 @Component({
   selector: 'app-trousseau',
@@ -96,7 +97,8 @@ export class TrousseauPage implements OnInit {
       private _navController:     NavController,
       private _trousseauService:  TrousseauService) 
   { 
-    this._itens                   = this._route.snapshot.data._itens;
+    let flatItem:FlatItem[]       = this._route.snapshot.data._itens;
+    this._itens                   = flatItem.map( itemFlat => itemFlat.item );
     this._trousseau               = this._route.snapshot.data._trousseau;
     
     this._route.paramMap.subscribe(params => {
@@ -104,12 +106,12 @@ export class TrousseauPage implements OnInit {
 
       if(flatCode)
       {
-        this._flatCode = flatCode;
+        this._flatCode  = flatCode;
       }
       else
       {
         this._flatCode  = this._trousseau.flat.code;
-        this._itens     = this._trousseau.flat.itens;
+        this._itens     = this._trousseau.flat.itens.map( itemFlat => itemFlat.item );
       }
     })
   }

@@ -5,6 +5,7 @@ import { ItemService } from './services/item.service';
 import { TrousseauService } from './services/trousseau.service';
 import { FlatResolverService } from './pages/flat/resolver/flat-resolver.service';
 import { TrousseauByIdResolverService } from './pages/trousseau/resolver/trousseau-by-id-resolver.service';
+import { ItensFlatOfTrousseauResolverService } from './pages/trousseau/resolver/itens-flat-of-trousseau-resolver.service';
 
 const routes: Routes = [
   {
@@ -34,14 +35,14 @@ const routes: Routes = [
     path: 'trousseau/:trousseau',
     resolve: {
       _trousseau: TrousseauByIdResolverService,
-      _itens: ItemService
+      _itens: ItensFlatOfTrousseauResolverService
     },
     loadChildren: () => import('./pages/trousseau/trousseau.module').then( m => m.TrousseauPageModule)
   },
   {
     path: 'trousseau-report/:trousseau',
     resolve: {
-      _itens: ItemService,
+      _itens: ItensFlatOfTrousseauResolverService,
       _trousseau: TrousseauService
     },
     loadChildren: () => import('./pages/trousseau-report/trousseau-report.module').then( m => m.TrousseauReportPageModule)

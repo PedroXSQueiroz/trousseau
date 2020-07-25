@@ -1,8 +1,9 @@
 import Item from './item';
+import FlatItem from '../dtos/flat-item';
 
 export default class Flat
 {
-    constructor(private _floor:number = null, private _unity:number = null, private _itens:Item[])
+    constructor(private _floor:number = null, private _unity:number = null, private _itens:FlatItem[] = null)
     {
 
     }
@@ -32,12 +33,12 @@ export default class Flat
         return `${this._floor}${(this._unity).toString().padStart(2, '0')}`
     }
 
-    get itens():Item[]
+    get itens():FlatItem[]
     {
         return this._itens;
     }
 
-    set itens(itens:Item[])
+    set itens(itens:FlatItem[])
     {
         this._itens = itens;
     }

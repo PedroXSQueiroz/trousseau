@@ -5,6 +5,7 @@ import Item from 'src/app/models/item';
 import { File } from '@ionic-native/file/ngx';
 
 import html2pdf from 'html2pdf.js'
+import FlatItem from 'src/app/dtos/flat-item';
 
 @Component({
   selector: 'app-trousseau-report',
@@ -47,11 +48,11 @@ export class TrousseauReportPage implements OnInit {
     return item.value * this.getQuantity(item);
   }
 
-  private _itens:Item[];
+  private _itens:FlatItem[];
 
   get itens():Item[]
   {
-    return this._itens;
+    return this._itens.map( flatItem => flatItem.item );
   }
   
   constructor(  private _route: ActivatedRoute,
