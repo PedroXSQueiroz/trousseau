@@ -21,9 +21,9 @@ export class FlatService implements Resolve<Flat[]> {
     return this.listFlats();
   }
 
-  async listFlats(): Promise<Flat[]>
+  async listFlats(page:number = 0): Promise<Flat[]>
   {
-    return await this.list();
+    return await this.list(page);
   }
 
   createTrousseauOnFlat(flat:Flat)
@@ -39,10 +39,15 @@ export class FlatService implements Resolve<Flat[]> {
     return new Flat(floor, unity);
   }
 
-  private async list() {
+  private async list(page:number = 0) {
     
     let typeUtils: TypeUtils<Flat> = new TypeUtils<Flat>(Flat);
-    let flatsSrc: Page<Flat> = await this._httpClient.get<Page<Flat>>(`${environment.apiHost}/flats/`).toPromise();
+    let flatsSrc: Page<Flat> = await this._httpClient.get<Page<Flat>>(`${environment.apiHost}/flats/`, {
+      params: {
+        page: page.toString(),
+        size: BuildingSpecs.UNITIES_PER_FLOOR.toString()
+      }
+    }).toPromise();
     let flats: Flat[] = flatsSrc.content.map(flat => typeUtils.fromAny(flat));
     
     return flats;

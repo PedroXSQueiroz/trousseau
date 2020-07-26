@@ -20,27 +20,14 @@
             </ion-col>
             
             <ion-col>
-              <ion-button color="primary" [routerLink]="'/flat/' + flat.code" routerDirection="forward" >Enxovais</ion-button>
+              <ion-button color="medium" expand="full" [routerLink]="'/flat/' + flat.code" routerDirection="forward" >Enxovais</ion-button>
             </ion-col>
             
             <ion-col>
-              <ion-button color="primary" [routerLink]="'/flat/' + flat.code + '/trousseau'" routerDirection="forward" >Novo Enxoval</ion-button>
+              <ion-button color="primary" expand="full" [routerLink]="'/flat/' + flat.code + '/trousseau'" routerDirection="forward" >Novo Enxoval</ion-button>
             </ion-col>
 
           </ion-row>
-
-          <!-- <ion-row>
-
-            <ion-col>
-              <ion-text> Útimo Enxoval: 10/10/2020 </ion-text>
-            </ion-col>
-
-            <ion-col>
-              <ion-router-link color="primary" [href]="'/flat/' + flat.code + '/trousseau'">Continuar</ion-router-link>
-            </ion-col>
-
-          </ion-row> -->
-          
 
         </ion-grid>
       </ion-card-content>
@@ -48,5 +35,12 @@
     </ion-card>
 
   </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadFlats($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Carregando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

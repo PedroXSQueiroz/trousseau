@@ -10,12 +10,16 @@
   <ion-grid>
     
     <ion-row>
-      <ion-col size="10" offset="0">
+      <ion-col size="8" offset="2">
         <h3>Enxovais</h3>
       </ion-col>
 
       <ion-col size="2" class="add-trousseau-link" >
-        <ion-router-link color="primary" [href]="'/flat/' + flat.code + '/trousseau'" >Adicionar Enxoval</ion-router-link>
+
+        <ion-fab-button [routerLink]="'/flat/' + flat.code + '/trousseau'" >
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+        <!-- <ion-button color="primary" [routerLink]="'/flat/' + flat.code + '/trousseau'" >Adicionar Enxoval</ion-button> -->
       </ion-col>
       
     </ion-row>
@@ -60,7 +64,7 @@
                 </ion-col>
       
                 <ion-col>
-                  <ion-router-link color="primary" [href]="'/trousseau/' + trousseau.id">{{getViewButtonLabel(trousseau)}}</ion-router-link>
+                  <ion-button color="primary" [routerLink]="'/trousseau/' + trousseau.id">{{getViewButtonLabel(trousseau)}}</ion-button>
                 </ion-col>
       
               </ion-row>
