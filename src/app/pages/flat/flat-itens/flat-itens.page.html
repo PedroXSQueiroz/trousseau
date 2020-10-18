@@ -1,0 +1,11 @@
+<ion-content padding>
+  
+  <ion-text size="large" >Itens</ion-text>
+  
+  <ion-list>
+    <ion-item *ngFor="let item of itens">
+      <ion-label> {{item.name}} </ion-label>
+      <ion-label> {{item.value}} </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

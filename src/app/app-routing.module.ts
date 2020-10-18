@@ -53,6 +53,7 @@ const routes: Routes = [
       _flatData: FlatResolverService
     },
     loadChildren: () => import('./pages/flat/flat.module').then( m => m.FlatPageModule)
+    
   }
 
 ];

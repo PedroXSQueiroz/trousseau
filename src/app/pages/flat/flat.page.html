@@ -6,8 +6,10 @@
 
 <ion-content>
   
-  
-  <ion-grid>
+  <ion-router-outlet></ion-router-outlet>
+
+
+  <!-- <ion-grid>
     
     <ion-row>
       <ion-col size="8" offset="2">
@@ -19,7 +21,7 @@
         <ion-fab-button [routerLink]="'/flat/' + flat.code + '/trousseau'" >
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
-        <!-- <ion-button color="primary" [routerLink]="'/flat/' + flat.code + '/trousseau'" >Adicionar Enxoval</ion-button> -->
+        
       </ion-col>
       
     </ion-row>
@@ -79,6 +81,20 @@
 
     </ion-row>
 
-  </ion-grid>
+  </ion-grid> -->
 
+  
+  <!-- <ion-tabs>
+    <ion-tab-bar slot="bottom">
+
+      <ion-tab-button tab="itens">
+        <ion-text>Itens</ion-text>
+      </ion-tab-button>
+
+      <ion-tab-button tab="trousseaus">
+        <ion-text>Enxovais</ion-text>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs> -->
 </ion-content>
