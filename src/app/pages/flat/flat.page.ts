@@ -16,8 +16,8 @@ export class FlatPage implements OnInit {
   
   constructor( private _route: ActivatedRoute ) 
   {
-    this._flat            = this._route.snapshot.data._flatData.flat;
-    this,this._trousseaus = this._route.snapshot.data._flatData.trousseaus;
+    this._flat        = this._route.snapshot.data._flatData.flat;
+    this._trousseaus  = this._route.snapshot.data._flatData.trousseaus;
 
   }
 

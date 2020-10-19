@@ -1,0 +1,44 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-title>Item no flat {{flatCode}}</ion-title>
+    
+    <ion-buttons slot="end">
+      
+      <ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+  
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="flatItemForm">
+
+    <ion-item>
+      <ion-label position="fixed">Nome</ion-label>
+      <ion-input formControlName="name" [(ngModel)]="flatItem.item.name" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">Valor</ion-label>
+      <ion-input type="number" formControlName="value" [(ngModel)]="flatItem.item.value" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">Quantidade</ion-label>
+      <ion-input type="number" formControlName="quantity" [(ngModel)]="flatItem.quantity" ></ion-input>
+    </ion-item>
+    
+    <ion-fab vertical="bottom" horizontal="center">
+      <ion-fab-button (click)="saveFlatItem()" [disabled]="!flatItemForm.valid" >
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  </form>
+  
+
+</ion-content>

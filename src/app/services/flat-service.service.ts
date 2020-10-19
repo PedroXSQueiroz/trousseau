@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import TypeUtils from '../utils/type-utils';
 import Page from '../dtos/page';
+import FlatItem from '../dtos/flat-item';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,11 @@ export class FlatService implements Resolve<Flat[]> {
     const flat:Flat = new Flat(currentFloor, currentUnityOnFloor);
     
     return flat;
+  }
+
+  public async createItemOnFlat(flatCode:string, flatItem:FlatItem)
+  {
+    await this._httpClient.post(`${environment.apiHost}/flats/${flatCode}/item`, flatItem).toPromise();
   }
 }
 

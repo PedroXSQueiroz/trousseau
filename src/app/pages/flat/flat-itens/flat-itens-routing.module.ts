@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: FlatItensPage
+  },
+  {
+    path: 'flat-item-form',
+    loadChildren: () => import('./flat-item-form/flat-item-form.module').then( m => m.FlatItemFormPageModule)
   }
 ];
 

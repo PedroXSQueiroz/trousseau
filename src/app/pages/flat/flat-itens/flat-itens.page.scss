@@ -1,0 +1,22 @@
+ion-row{
+    
+    .flat-item{
+        height: 3rem;
+        ion-label{
+            font-size: medium;
+            color: rgb(66 , 66 , 66);
+        }
+        
+        
+    }
+
+   
+}
+
+ion-row:nth-child(even){
+    
+    .flat-item{
+        background: rgba(0,0,0,.05);
+    }
+    
+}

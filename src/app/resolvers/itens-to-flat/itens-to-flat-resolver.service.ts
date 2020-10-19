@@ -15,7 +15,7 @@ export class ItensToFlatResolverService implements Resolve<Item[]> {
   
   async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Item[]> {
     
-    const flatCode = route.paramMap.get('flat');
+    const flatCode = state.url.match(/flat\/([0-9]+)\/flat-itens/)[1];
 
     let typeUtils:TypeUtils<Item> = new TypeUtils<Item>(Item);
 
