@@ -1,13 +1,12 @@
 ion-row{
     
-    .flat-item{
-        height: 3rem;
-        ion-label{
-            font-size: medium;
-            color: rgb(66 , 66 , 66);
-        }
+    ion-item-sliding{
         
+        ion-item-options{
+            background-color: rgba(0,0,0,.05);
+        }
     }
+
 
     ion-col:last-child{
         text-align: right;
@@ -21,10 +20,11 @@ ion-row{
 
 }
 
-ion-row:nth-child(even){
+ion-item:nth-child(even){
+    
+    background-color: rgba(0,0,0,.05);
     
     .flat-item{
-        background: rgba(0,0,0,.05);
     }
     
 }

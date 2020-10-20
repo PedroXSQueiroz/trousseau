@@ -69,6 +69,10 @@ export class FlatService implements Resolve<Flat[]> {
   public async updateItemOnFlat(flatCode: string, itemName: string, flatItem: FlatItem) {
     await this._httpClient.put(`${environment.apiHost}/flats/${flatCode}/item/${itemName}`, flatItem).toPromise();
   }
+
+  public async removeItemFromFLat(flatCode: string, itemName: string) {
+    await this._httpClient.delete(`${environment.apiHost}/flats/${flatCode}/item/${itemName}`).toPromise();
+  }
 }
 
 

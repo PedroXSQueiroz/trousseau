@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import FlatItem from 'src/app/dtos/flat-item';
 import Item from 'src/app/models/item';
+import { FlatService } from 'src/app/services/flat-service.service';
 import { FlatItemFormPage } from './flat-item-form/flat-item-form.page';
+import { FlatItensPageModule } from './flat-itens.module';
 
 
 @Component({
@@ -25,7 +27,9 @@ export class FlatItensPage implements OnInit {
   constructor(
               private _route: ActivatedRoute,
               private _router: Router,
-              private _modalController:ModalController) 
+              private _modalController:ModalController,
+              private _flatService: FlatService,
+              private _alertController:AlertController) 
   { 
     this._itens = this._route.snapshot.data._itens;
 
@@ -45,6 +49,29 @@ export class FlatItensPage implements OnInit {
     });
 
     flatItemForm.present();
+  }
+
+  async showFlatItemDeleteDialog(flatItem:FlatItem)
+  {
+    let alert = await this._alertController.create({
+      header:'Atenção',
+      message: `Tem certeza que deseja deletar o item ${flatItem.item.name}?`,
+      buttons:[
+        {
+          text: 'SIM',
+          handler: () => {
+            this._flatService.removeItemFromFLat( this.flatCode, flatItem.item.name );
+          }
+        },
+        {
+          text: 'CANCELAR',
+          role: 'cancel'
+        }
+      ]
+    });
+
+    alert.present();
+    
   }
 
   ngOnInit() {
