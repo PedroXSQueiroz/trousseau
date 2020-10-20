@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import FlatItem from 'src/app/dtos/flat-item';
 import Item from 'src/app/models/item';
 import { FlatItemFormPage } from './flat-item-form/flat-item-form.page';
 
@@ -33,12 +34,13 @@ export class FlatItensPage implements OnInit {
 
   }
 
-  async showFlatItemForm()
+  async showFlatItemForm(flatItem:FlatItem = null)
   {
     let flatItemForm = await this._modalController.create({
       component: FlatItemFormPage,
       componentProps: {
-        'flatCode': this.flatCode
+        'flatCode': this.flatCode,
+        'flatItem': flatItem 
       }
     });
 

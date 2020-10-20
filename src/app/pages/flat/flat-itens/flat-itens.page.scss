@@ -7,10 +7,18 @@ ion-row{
             color: rgb(66 , 66 , 66);
         }
         
-        
     }
 
-   
+    ion-col:last-child{
+        text-align: right;
+        padding-right: 2rem;
+
+        ion-button{
+            right:0;
+            position: absolute;
+        }
+    }
+
 }
 
 ion-row:nth-child(even){

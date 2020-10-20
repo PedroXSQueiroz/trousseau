@@ -1,4 +1,3 @@
-import Item from './item';
 import FlatItem from '../dtos/flat-item';
 
 export default class Flat

@@ -15,7 +15,7 @@ import FlatItem from '../dtos/flat-item';
   providedIn: 'root'
 })
 export class FlatService implements Resolve<Flat[]> {
-
+  
   constructor(private _httpClient:HttpClient) { }
   
   resolve(route:ActivatedRouteSnapshot, state: RouterStateSnapshot): Flat[] | Observable<Flat[]> | Promise<Flat[]> {
@@ -64,6 +64,10 @@ export class FlatService implements Resolve<Flat[]> {
   public async createItemOnFlat(flatCode:string, flatItem:FlatItem)
   {
     await this._httpClient.post(`${environment.apiHost}/flats/${flatCode}/item`, flatItem).toPromise();
+  }
+
+  public async updateItemOnFlat(flatCode: string, itemName: string, flatItem: FlatItem) {
+    await this._httpClient.put(`${environment.apiHost}/flats/${flatCode}/item/${itemName}`, flatItem).toPromise();
   }
 }
 
