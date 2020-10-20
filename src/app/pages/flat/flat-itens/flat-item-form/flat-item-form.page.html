@@ -18,18 +18,30 @@
   <form [formGroup]="flatItemForm">
 
     <ion-item>
-      <ion-label position="fixed">Nome</ion-label>
+      <ion-label position="fixed">Nome:</ion-label>
       <ion-input formControlName="name" [(ngModel)]="flatItem.item.name" ></ion-input>
+
+      <ion-chip *ngFor="let error of getFieldErrors('name')" color="danger" >
+        <ion-label>{{error}}</ion-label>
+      </ion-chip>
     </ion-item>
 
     <ion-item>
-      <ion-label position="fixed">Valor</ion-label>
+      <ion-label position="fixed">Valor:</ion-label>
       <ion-input type="number" formControlName="value" [(ngModel)]="flatItem.item.value" ></ion-input>
+
+      <ion-chip *ngFor="let error of getFieldErrors('value')" color="danger" >
+        <ion-label>{{error}}</ion-label>
+      </ion-chip>
     </ion-item>
 
     <ion-item>
-      <ion-label position="fixed">Quantidade</ion-label>
+      <ion-label position="fixed">Quantidade:</ion-label>
       <ion-input type="number" formControlName="quantity" [(ngModel)]="flatItem.quantity" ></ion-input>
+
+      <ion-chip *ngFor="let error of getFieldErrors('quantity')" color="danger" >
+        <ion-label>{{error}}</ion-label>
+      </ion-chip>
     </ion-item>
     
     <ion-fab vertical="bottom" horizontal="center">

@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import FlatItem from 'src/app/dtos/flat-item';
 import Item from 'src/app/models/item';
 import { FlatService } from 'src/app/services/flat-service.service';
+import { MessagesUtils } from 'src/app/utils/messages-utils';
 
 @Component({
   selector: 'app-flat-item-form',
@@ -16,13 +17,25 @@ export class FlatItemFormPage implements OnInit {
   @Input("flatCode") 
   public flatCode: string;
   
-  public flatItemForm:FormGroup;
-
   @Input("flatItem")
   public flatItem:FlatItem;
+  
+  public flatItemForm:FormGroup;
 
   private _preExistentItemName:string;
   
+  private errorMessages = {
+    name: [
+      {type: 'required', message: 'Nome é obrigatório'}
+    ],
+    quantity: [
+      {type: 'required', message: 'Quantidade é obrigatória'}
+    ],
+    value: [
+      {type: 'required', message: 'Valor é obrigatório'}
+    ]
+  }
+
   constructor(
     private _flatService:FlatService,
     private _formBuilder:FormBuilder,
@@ -60,7 +73,6 @@ export class FlatItemFormPage implements OnInit {
 
   ngOnInit() {
   
-    
     if(!this.flatItem)
     {
       this.flatItem = new FlatItem();
@@ -79,6 +91,11 @@ export class FlatItemFormPage implements OnInit {
       this.flatItem = auxFlatItem;
     }
   
+  }
+
+  getFieldErrors(fieldName:string):string[]
+  {
+    return MessagesUtils.getMessageErrorForm( this.errorMessages[fieldName], this.flatItemForm, fieldName, true );
   }
 
 }

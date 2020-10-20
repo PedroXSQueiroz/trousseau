@@ -27,6 +27,9 @@
     <ion-row *ngFor="let flatItem of itens">
       
       <ion-item-sliding>
+      
+        <span>
+        </span>
         
         <ion-item-options slot="left">
           <ion-buttons>
@@ -43,7 +46,7 @@
         </ion-item-options>
         
         <ion-item class="flat-item" >
-
+          
           <ion-col size="6">
             <ion-label> {{flatItem.item.name}} </ion-label>
           </ion-col>
@@ -55,7 +58,7 @@
           <ion-col size="3">
             <ion-label> {{flatItem.quantity}} </ion-label>
           </ion-col>
-  
+
         </ion-item>
       
       </ion-item-sliding>
