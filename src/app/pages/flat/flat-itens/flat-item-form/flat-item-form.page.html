@@ -19,7 +19,7 @@
 
     <ion-item>
       <ion-label position="fixed">Nome:</ion-label>
-      <ion-input formControlName="name" [(ngModel)]="flatItem.item.name" ></ion-input>
+      <ion-input formControlName="name" [(ngModel)]="flatItem.item.name" (ngModelChange)="flatItem.item.name = ( flatItem.item.name && flatItem.item.name.toUpperCase() ) || null " ></ion-input>
 
       <ion-chip *ngFor="let error of getFieldErrors('name')" color="danger" >
         <ion-label>{{error}}</ion-label>
@@ -28,7 +28,10 @@
 
     <ion-item>
       <ion-label position="fixed">Valor:</ion-label>
-      <ion-input type="number" formControlName="value" [(ngModel)]="flatItem.item.value" ></ion-input>
+      <ion-input 
+                formControlName="value" 
+                [ngModel]="getValue()"
+                (ngModelChange)="setValue($event)" ></ion-input>
 
       <ion-chip *ngFor="let error of getFieldErrors('value')" color="danger" >
         <ion-label>{{error}}</ion-label>

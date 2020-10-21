@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
@@ -10,7 +11,7 @@ import { MessagesUtils } from 'src/app/utils/messages-utils';
   selector: 'app-flat-item-form',
   templateUrl: './flat-item-form.page.html',
   styleUrls: ['./flat-item-form.page.scss'],
-  providers:[FormBuilder]
+  providers:[FormBuilder, CurrencyPipe]
 })
 export class FlatItemFormPage implements OnInit {
 
@@ -39,7 +40,8 @@ export class FlatItemFormPage implements OnInit {
   constructor(
     private _flatService:FlatService,
     private _formBuilder:FormBuilder,
-    private _modalController:ModalController)
+    private _modalController:ModalController,
+    private _currencyPipe: CurrencyPipe)
   { 
 
     this.flatItemForm = this._formBuilder.group({
@@ -67,7 +69,7 @@ export class FlatItemFormPage implements OnInit {
       await this._flatService.createItemOnFlat( this.flatCode, this.flatItem );
     }
     
-    await this._modalController.dismiss();
+    await this._modalController.dismiss(this.flatItem);
 
   }
 
@@ -91,6 +93,32 @@ export class FlatItemFormPage implements OnInit {
       this.flatItem = auxFlatItem;
     }
   
+  }
+
+  setValue(valueFormatted)
+  {
+    
+    if(!valueFormatted)
+    {
+      this.flatItem.item.value = 0;
+    }
+    else
+    {
+      
+      const digits = valueFormatted.match(/[0-9]+/g);
+  
+      if(!digits)
+      {
+      }else
+      {
+        this.flatItem.item.value = parseFloat(digits.join('')) / 100;
+      }
+    }
+  }
+  
+  getValue()
+  {
+    return this._currencyPipe.transform( this.flatItem.item.value, 'BRL' );
   }
 
   getFieldErrors(fieldName:string):string[]

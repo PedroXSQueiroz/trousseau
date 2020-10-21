@@ -8,6 +8,7 @@ import { FlatItemFormPageRoutingModule } from './flat-item-form-routing.module';
 
 import { FlatItemFormPage } from './flat-item-form.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
