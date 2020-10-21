@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import FlatItem from 'src/app/dtos/flat-item';
 import Item from 'src/app/models/item';
 import { FlatService } from 'src/app/services/flat-service.service';
@@ -41,7 +41,8 @@ export class FlatItemFormPage implements OnInit {
     private _flatService:FlatService,
     private _formBuilder:FormBuilder,
     private _modalController:ModalController,
-    private _currencyPipe: CurrencyPipe)
+    private _currencyPipe: CurrencyPipe,
+    private _alertController:AlertController)
   { 
 
     this.flatItemForm = this._formBuilder.group({
@@ -60,16 +61,35 @@ export class FlatItemFormPage implements OnInit {
   async saveFlatItem()
   {
     
-    if(this._preExistentItemName)
+    try
     {
-      await this._flatService.updateItemOnFlat( this.flatCode, this._preExistentItemName, this.flatItem );
+
+      if(this._preExistentItemName)
+      {
+        await this._flatService.updateItemOnFlat( this.flatCode, this._preExistentItemName, this.flatItem );
+      }
+      else
+      {
+        await this._flatService.createItemOnFlat( this.flatCode, this.flatItem );
+      }
+      
+      await this._modalController.dismiss(this.flatItem);
+
     }
-    else
+    catch(e)
     {
-      await this._flatService.createItemOnFlat( this.flatCode, this.flatItem );
+      
+      let errorAlert = await this._alertController.create({
+        header: 'Atenção',
+        message: e.error.message,
+        cssClass: 'danger',
+        buttons:['OK']
+      });
+
+      errorAlert.present();
+
     }
     
-    await this._modalController.dismiss(this.flatItem);
 
   }
 
