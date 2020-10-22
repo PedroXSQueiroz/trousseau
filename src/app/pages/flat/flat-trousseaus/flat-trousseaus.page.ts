@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TrousseauStatus } from 'src/app/contants/trousseau-status';
 import Trousseau from 'src/app/models/trousseau';
 
 @Component({
@@ -25,6 +26,16 @@ export class FlatTrousseausPage implements OnInit {
   {
     this._trousseaus = this._route.snapshot.data._trousseaus;
     this.flatCode = this._router.url.match(/flat\/([0-9]+)\/flat-trousseaus/)[1];
+  }
+
+  public getStatusLabel(status:TrousseauStatus):string
+  {
+    return TrousseauStatus.getLabel(status);
+  }
+
+  public isFinished(trousseau:Trousseau)
+  {
+    return TrousseauStatus.isFinished( trousseau.status );
   }
 
   ngOnInit() {

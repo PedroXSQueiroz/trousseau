@@ -29,4 +29,9 @@ export namespace TrousseauStatus
                 return '';
         }
     }
+
+    export function isFinished(status:TrousseauStatus):boolean
+    {
+        return status == TrousseauStatus.OK || status == TrousseauStatus.NOT_OK;
+    }
 }

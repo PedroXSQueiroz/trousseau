@@ -5,18 +5,12 @@ ion-row{
         ion-item-options{
             background-color: rgba(0,0,0,.05);
         }
-    }
 
-
-    ion-col:last-child{
-        text-align: right;
-        padding-right: 2rem;
-
-        ion-button{
-            right:0;
-            position: absolute;
+        ion-item{
+            --inner-padding-end: 0;
         }
     }
+
 }
 
 ion-row:nth-child(even){
