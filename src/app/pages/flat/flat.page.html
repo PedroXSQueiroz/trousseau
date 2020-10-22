@@ -2,6 +2,20 @@
   <ion-toolbar>
     <ion-title>Flat {{flat.code}}</ion-title>
   </ion-toolbar>
+
+  <ion-tab-bar>
+    
+    <ion-tab-button tab="itens" [routerLink]="'/flat/' + flat.code + '/flat-itens'">
+      <ion-icon name="shirt-outline"></ion-icon>
+      <ion-tab-label>Itens</ion-tab-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="itens" [routerLink]="'/flat/' + flat.code + '/flat-trousseaus'">
+      <ion-icon name="bed-outline"></ion-icon>
+      <ion-tab-label>Enxovais</ion-tab-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
 </ion-header>
 
 <ion-content>
