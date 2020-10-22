@@ -1,9 +1,7 @@
 from node:latest
 
-VOLUME . /app/
-
 RUN npm install -g @ionic/cli && \
-    npm install
+    npm install -g @angular/cli
 
 EXPOSE 8100:8100
 
