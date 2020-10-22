@@ -77,9 +77,13 @@ export class TrousseauService implements Resolve<Trousseau> {
     return Trousseau.itensArrayToMap(itensDiff);
   }
 
-  async listTrousseausByFlat(flat: Flat): Promise<Trousseau[]> {
+  async listTrousseausByFlat(flat: Flat | string): Promise<Trousseau[]> {
     
-    let trousseausSrcs:Trousseau[] = await this._httpClient.get<Trousseau[]>(`${environment.apiHost}/flats/${flat.code}/trousseaus`).toPromise();
+    let flatCode = flat instanceof Flat ?
+                    flat.code :
+                    flat;
+    
+    let trousseausSrcs:Trousseau[] = await this._httpClient.get<Trousseau[]>(`${environment.apiHost}/flats/${flatCode}/trousseaus`).toPromise();
 
     return trousseausSrcs.map( currentTrousseausSrc => this._trousseauTypeUtils.fromAny(currentTrousseausSrc)  );
 

@@ -1,9 +1,70 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>flat-trousseaus</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar>
+  <ion-title>Enxovais</ion-title>
+</ion-toolbar>
 
 <ion-content>
-  <h1>Enxovais</h1>
+  <ion-grid>
+    
+    <ion-row>
+      <ion-item-divider>
+        
+        <ion-col size="4">
+          <ion-label>Status</ion-label>
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-label>Itens</ion-label>
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-label>Data de criação</ion-label>
+        </ion-col>
+
+      </ion-item-divider>
+    </ion-row>
+
+    <ion-row *ngFor="let trousseau of trousseaus">
+      
+      <ion-item-sliding>
+      
+        <span>
+        </span>
+        
+        <ion-item-options slot="left">
+          <ion-buttons>
+            
+            <ion-button icon-only [routerLink]="'/trousseau/' + trousseau.id" routerDirection="forward" >
+              <ion-icon name="play-forward-outline"></ion-icon>
+            </ion-button>
+
+          </ion-buttons>
+        </ion-item-options>
+        
+        <ion-item class="trousseau-item" >
+          
+          <ion-col size="4">
+            <ion-label> {{trousseau.status}} </ion-label>
+          </ion-col>
+  
+          <ion-col size="4">
+            <ion-label> --- </ion-label>
+          </ion-col>
+  
+          <ion-col size="4">
+            <ion-label> {{trousseau.date | date : 'dd/MM/yyyy'}} </ion-label>
+          </ion-col>
+
+        </ion-item>
+      
+      </ion-item-sliding>
+      
+    </ion-row>    
+
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="'/flat/' + flatCode + '/trousseau'" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
