@@ -12,7 +12,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatStepperModule} from "@angular/material/stepper";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,9 +23,11 @@ import { FormsModule } from '@angular/forms';
     [ BrowserModule, 
       IonicModule.forRoot(), 
       AppRoutingModule, 
+      MatStepperModule,
       FormsModule,
       IonicStorageModule.forRoot(),
-      HttpClientModule],
+      HttpClientModule,
+      BrowserAnimationsModule],
   providers: [
     StatusBar,
     SplashScreen,

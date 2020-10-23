@@ -8,6 +8,7 @@ import { TrousseauPageRoutingModule } from './trousseau-routing.module';
 
 import { TrousseauPage } from './trousseau.page';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatStepperModule } from "@angular/material/stepper";
 
 @NgModule({
   imports: [
@@ -15,8 +16,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     IonicModule,
     TrousseauPageRoutingModule,
-    NgSelectModule
-
+    NgSelectModule,
+    MatStepperModule
   ],
   declarations: [TrousseauPage]
 })

@@ -32,6 +32,7 @@
               }
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               {
                 "input": "src/theme/variables.scss"
               },
@@ -115,7 +116,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "styles": [],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
             "scripts": [],
             "assets": [
               {
@@ -174,7 +177,7 @@
             "production": {
               "browserTarget": "app:build:production"
             },
-            "heroku":{
+            "heroku": {
               "browserTarget": "app:build:heroku"
             }
           }
@@ -190,7 +193,7 @@
               "cordovaBuildTarget": "app:ionic-cordova-build:production",
               "devServerTarget": "app:serve:production"
             },
-            "heroku":{
+            "heroku": {
               "browserTarget": "app:build:heroku"
             }
           }

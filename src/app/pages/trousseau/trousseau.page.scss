@@ -41,3 +41,7 @@
     width: 100%;
 }
 
+.cdk-touch-focused ~ .mat-vertical-content-container
+{
+    height: 38vh;
+}

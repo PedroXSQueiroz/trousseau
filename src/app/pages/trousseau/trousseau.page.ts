@@ -8,11 +8,13 @@ import { __spreadArrays } from 'tslib';
 import { IfStmt } from '@angular/compiler';
 import { TrousseauService } from 'src/app/services/trousseau.service';
 import FlatItem from 'src/app/dtos/flat-item';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-trousseau',
   templateUrl: './trousseau.page.html',
   styleUrls: ['./trousseau.page.scss'],
+  providers:[FormBuilder]
 })
 export class TrousseauPage implements OnInit {
 
@@ -91,11 +93,13 @@ export class TrousseauPage implements OnInit {
   @ViewChild('incosistentItensList')
   public incosistentItensList: TemplateRef<any>;
 
+  public simpleForm:FormGroup;
 
   constructor(
       private _route:             ActivatedRoute,
       private _navController:     NavController,
-      private _trousseauService:  TrousseauService) 
+      private _trousseauService:  TrousseauService,
+      private _formBuilder: FormBuilder) 
   { 
     let flatItem:FlatItem[]       = this._route.snapshot.data._itens;
     this._itens                   = flatItem.map( itemFlat => itemFlat.item );
@@ -114,6 +118,8 @@ export class TrousseauPage implements OnInit {
         this._itens     = this._trousseau.flat.itens.map( itemFlat => itemFlat.item );
       }
     })
+
+    this.simpleForm = this._formBuilder.group([]);
   }
 
   ngOnInit() {

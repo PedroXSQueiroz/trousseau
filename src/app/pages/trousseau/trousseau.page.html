@@ -19,7 +19,26 @@
 
 <ion-content>
 
-  <ion-grid>
+  <mat-vertical-stepper>
+    <mat-step>
+      <ng-template matStepLabel> Iniciando </ng-template>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel> Enviando </ng-template>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel> Recebendo </ng-template>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel> Finalizando </ng-template>
+    </mat-step>
+
+  </mat-vertical-stepper>
+
+  <!-- <ion-grid>
 
     <ion-row>
       
@@ -191,6 +210,6 @@
 
     </ion-row>
 
-  </ion-grid>
+  </ion-grid> -->
 
 </ion-content>
