@@ -35,14 +35,6 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
     return this._itens;
   }
 
-  // @Input()
-  // set trousseau(trousseau:Trousseau)
-  // {
-  //   this._trousseau = trousseau;
-  // }
-  
-  // private _trousseau:Trousseau;
-
   @Input() flatCode:string;
 
   constructor(@Host() container:StepContainerComponent,
@@ -58,10 +50,6 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
   async confirm() {
     await this.initTrousseau();
   }
-  
-  // cancel() {
-    
-  // }
   
   getCancelLabel(): string {
     return 'CANCELAR'
@@ -81,6 +69,16 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
   get currentItemQuantity(): number[]
   {
     return this._currentItemQuantity;
+  }
+
+  get currentSelectedItem():FlatItem
+  {
+    return this._currentSelectedItem;
+  }
+
+  set currentSelectedItem( item:FlatItem )
+  {
+    this._currentSelectedItem = item;
   }
 
   private _currentSelectedItem:FlatItem;
@@ -107,6 +105,18 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
   
   }
 
+  private _currentSelectedQuantity: number;
+
+  get currentSelectedQuantity():number
+  {
+    return this._currentSelectedQuantity;
+  }
+
+  set currentSelectedQuantity(quantity:number)
+  {
+    this._currentSelectedQuantity = quantity;
+  }
+
   selectQuantity(quantity:number)
   {
     this._trousseau.addItem(this._currentSelectedItem.item, quantity);
@@ -116,6 +126,8 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
 
     this._currentItemQuantity = null;
     this._currentSelectedItem = null;
+
+    this._currentSelectedQuantity = null;
   }
 
   get selectedItens():Item[]

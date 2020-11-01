@@ -4,7 +4,7 @@
     
     <ion-label>Selecione um Item</ion-label>
     
-    <ion-select (ionChange)="selectItem($event.target.value)">
+    <ion-select [(ngModel)]="currentSelectedItem" (ionChange)="selectItem($event.target.value)">
       <ion-select-option 
         *ngFor="let flatItem of itens" 
         [value]="flatItem">
@@ -12,7 +12,7 @@
       </ion-select-option>
     </ion-select>
   
-    <ion-select #quantitySelect (ionChange)="selectQuantity($event.target.value)" hidden>
+    <ion-select #quantitySelect [(ngModel)]="currentSelectedQuantity" (ionChange)="selectQuantity($event.target.value)" hidden>
       <ion-select-option *ngFor="let currentQuantity of currentItemQuantity" [value]="currentQuantity">
         {{currentQuantity}}
       </ion-select-option>

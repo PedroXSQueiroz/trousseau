@@ -79,6 +79,16 @@ export class FinishingStepComponent extends StepTrousseauContent implements OnIn
     return this._currentItemQuantity;
   }
 
+  get currentSelectedItem():FlatItem
+  {
+    return this._currentSelectedItem;
+  }
+
+  set currentSelectedItem( item:FlatItem )
+  {
+    this._currentSelectedItem = item;
+  }
+
   private _currentSelectedItem:FlatItem;
 
   async selectItem(flatItem:FlatItem)
@@ -103,6 +113,18 @@ export class FinishingStepComponent extends StepTrousseauContent implements OnIn
   
   }
 
+  private _currentSelectedQuantity: number;
+
+  get currentSelectedQuantity():number
+  {
+    return this._currentSelectedQuantity;
+  }
+
+  set currentSelectedQuantity(quantity:number)
+  {
+    this._currentSelectedQuantity = quantity;
+  }
+
   selectQuantity(quantity:number)
   {
     this._comparingItens.set(this._currentSelectedItem.item, quantity);
@@ -112,6 +134,8 @@ export class FinishingStepComponent extends StepTrousseauContent implements OnIn
 
     this._currentItemQuantity = null;
     this._currentSelectedItem = null;
+
+    this._currentSelectedQuantity = null;
   }
 
   get selectedItens():Item[]
