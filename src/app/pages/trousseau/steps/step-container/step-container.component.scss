@@ -1,0 +1,21 @@
+ion-card{
+    
+    height: 71vh;
+    
+    .finish-buttons{
+        display: flex;
+        justify-content: space-around;
+        border-top: 1px solid var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))));
+        height: 3.5rem;
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+        padding: 0.25rem;
+        
+        ion-button{
+            --border-radius:50px;
+            width: 30%
+        }
+    }
+
+}

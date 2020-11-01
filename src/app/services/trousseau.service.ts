@@ -88,4 +88,27 @@ export class TrousseauService implements Resolve<Trousseau> {
     return trousseausSrcs.map( currentTrousseausSrc => this._trousseauTypeUtils.fromAny(currentTrousseausSrc)  );
 
   }
+
+  async validate(trousseauId:string, comparingItens:Map<Item, number>):Promise<Trousseau>
+  {
+    let receivedItens: Item[] = Array.from( comparingItens.keys() );
+
+    let itensToCompare: { ['item']:Item , ['quantity']:number }[] = receivedItens.map( currentItem => {
+      return {
+        item: currentItem,
+        quantity: comparingItens.get(currentItem)
+      }
+    });
+
+    let diff:Map<Item, number> = await this.getDiff( trousseauId, itensToCompare );
+
+    if(diff.size > 0)
+    {
+      return await this.setStatus( trousseauId, TrousseauStatus.NOT_OK, Trousseau.mapToItensArray( diff ) );
+    }
+    else
+    {
+      return  await this.setStatus(trousseauId, TrousseauStatus.OK);
+    }
+  }
 }

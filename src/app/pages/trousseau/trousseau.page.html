@@ -18,22 +18,46 @@
 </ion-header>
 
 <ion-content>
-
-  <mat-vertical-stepper>
-    <mat-step>
+  
+  <mat-vertical-stepper #steps>
+    <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.INITIAL)" >
       <ng-template matStepLabel> Iniciando </ng-template>
+
+      <step-container [steps]="steps">
+        <init-step 
+          [itens]="itens" 
+          [trousseau]="trousseau" 
+          [flatCode]="flatCode"
+          [status]="TrousseauStatus.INITIAL"></init-step>
+      </step-container>
+      
     </mat-step>
 
-    <mat-step>
+    <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.SENT)">
       <ng-template matStepLabel> Enviando </ng-template>
+      
+      <step-container [steps]="steps" >
+        <sending-step [trousseau]="trousseau" [status]="TrousseauStatus.SENT"></sending-step>
+      </step-container>
+
     </mat-step>
 
-    <mat-step>
+    <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.RETRIEVED)">
       <ng-template matStepLabel> Recebendo </ng-template>
+
+      <step-container [steps]="steps" >
+        <receiving-step [trousseau]="trousseau" [status]="TrousseauStatus.RETRIEVED"></receiving-step>
+      </step-container>
+      
     </mat-step>
 
-    <mat-step>
+    <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.OK) || trousseau.alreadyCompleted(TrousseauStatus.NOT_OK)">
       <ng-template matStepLabel> Finalizando </ng-template>
+
+      <step-container [steps]="steps" >
+        <finishing-step [itens]="itens" [trousseau]="trousseau"></finishing-step>
+      </step-container>
+
     </mat-step>
 
   </mat-vertical-stepper>

@@ -18,17 +18,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class TrousseauPage implements OnInit {
 
-  private _itens:Item[];
+  get TrousseauStatus(): typeof TrousseauStatus
+  {
+    return TrousseauStatus;
+  }
+  
+  private _itens:FlatItem[];
 
-  get itens():Item[]
+  get itens():FlatItem[]
   {
     return this._itens;
   }
 
-  get selectedItens():Item[]
-  {
-    return Array.from(this._trousseau.itens.keys());
-  }
+  // get selectedItens():Item[]
+  // {
+  //   return Array.from(this._trousseau.itens.keys());
+  // }
 
   private _selectedValiationsItensToQuantity: Map<Item, number> = new Map();
 
@@ -47,10 +52,10 @@ export class TrousseauPage implements OnInit {
     return this._trousseau.itens.size == 0;
   }
 
-  public getQuantityOfItem(item:Item):number
-  {
-    return this._trousseau.itens.get(item);
-  }
+  // public getQuantityOfItem(item:Item):number
+  // {
+  //   return this._trousseau.itens.get(item);
+  // }
 
   private _flatCode:string;
 
@@ -70,6 +75,11 @@ export class TrousseauPage implements OnInit {
   }
 
   private _trousseau:Trousseau;
+
+  get trousseau():Trousseau
+  {
+    return this._trousseau;
+  }
 
   @ViewChild('inicialActions')
   public initialActions: TemplateRef<any>;
@@ -101,8 +111,7 @@ export class TrousseauPage implements OnInit {
       private _trousseauService:  TrousseauService,
       private _formBuilder: FormBuilder) 
   { 
-    let flatItem:FlatItem[]       = this._route.snapshot.data._itens;
-    this._itens                   = flatItem.map( itemFlat => itemFlat.item );
+    this._itens                   = this._route.snapshot.data._itens;
     this._trousseau               = this._route.snapshot.data._trousseau;
     
     this._route.paramMap.subscribe(params => {
@@ -115,7 +124,7 @@ export class TrousseauPage implements OnInit {
       else
       {
         this._flatCode  = this._trousseau.flat.code;
-        this._itens     = this._trousseau.flat.itens.map( itemFlat => itemFlat.item );
+        this._itens     = this._trousseau.flat.itens;
       }
     })
 
@@ -227,16 +236,16 @@ export class TrousseauPage implements OnInit {
     this._trousseau = await this._trousseauService.setStatus(this._trousseau.id, TrousseauStatus.NOT_OK);
   }
 
-  async initTrousseau()
-  {
-    this._trousseau = await this._trousseauService.saveTrousseauOnFLat(this._flatCode,  this._trousseau);
-    this._trousseau = await this._trousseauService.setStatus(this._trousseau.id, TrousseauStatus.INITIAL);
-  }
+  // async initTrousseau()
+  // {
+  //   this._trousseau = await this._trousseauService.saveTrousseauOnFLat(this._flatCode,  this._trousseau);
+  //   this._trousseau = await this._trousseauService.setStatus(this._trousseau.id, TrousseauStatus.INITIAL);
+  // }
 
-  async sendTrousseau()
-  {
-    this._trousseau = await this._trousseauService.setStatus(this._trousseau.id, TrousseauStatus.SENT);
-  }
+  // async sendTrousseau()
+  // {
+  //   this._trousseau = await this._trousseauService.setStatus(this._trousseau.id, TrousseauStatus.SENT);
+  // }
 
   async retrieveTrousseau()
   {

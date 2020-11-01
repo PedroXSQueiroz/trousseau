@@ -68,7 +68,7 @@ export default class Trousseau implements DtoParseable
        return Trousseau.itensArrayToMap(this._itens);
     }
 
-    public addItem(item:Item)
+    public addItem(item:Item, quantity = null)
     {
         let itemIndex = this._itens.findIndex( currentItem => currentItem.item.id == item.id );
     
@@ -76,31 +76,42 @@ export default class Trousseau implements DtoParseable
         {
             this._itens.push({
                 item: item,
-                quantity: 1
+                quantity: quantity || 1
             })
         }else
         {
-            this._itens[itemIndex].quantity ++;
+            this._itens[itemIndex].quantity = quantity || ( this._itens[itemIndex].quantity + 1 );
         }
     
     }
 
-    public removeItem(item:Item)
+    public removeItem(item:Item, all = false)
     {
         let itemIndex = this._itens.findIndex( currentItem => currentItem.item.id == item.id );
 
         if(itemIndex != -1)
         {
-            let quantity = this._itens[itemIndex].quantity
-        
-            if(quantity > 1)
-            {
-                this._itens[itemIndex].quantity --;
-            }
-            else
+            
+            if(all)
             {
                 this._itens.splice(itemIndex, 1);
             }
+            else
+            {
+                
+                let quantity = this._itens[itemIndex].quantity
+            
+                if(quantity > 1)
+                {
+                    this._itens[itemIndex].quantity --;
+                }
+                else
+                {
+                    this._itens.splice(itemIndex, 1);
+                }
+
+            }
+            
         
         }
     }
@@ -125,7 +136,8 @@ export default class Trousseau implements DtoParseable
                 item: item,
                 quantity: 1
             })
-        }else
+        }
+        else
         {
             this._diff[itemIndex].quantity ++;
         }
@@ -214,6 +226,21 @@ export default class Trousseau implements DtoParseable
     set id(id:string)
     {
         this._id = id;
+    }
+
+    get isFinished():boolean
+    {
+        return TrousseauStatus.isFinished(this.status);
+    }
+
+    public alreadyCompleted(status: TrousseauStatus):boolean
+    {
+        if(!status || !this.status)
+        {
+            return false;
+        }
+        
+        return TrousseauStatus.getPosition(status) <= TrousseauStatus.getPosition(this.status);
     }
 
     toDto() 

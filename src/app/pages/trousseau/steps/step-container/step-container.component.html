@@ -1,0 +1,10 @@
+<ion-card>
+  
+  <ng-content></ng-content>
+
+  <div *ngIf="showFinishButtons" class="finish-buttons">
+    <ion-button (click)="cancel()" color="danger" >  <ion-icon name="close-outline" size="medium" ></ion-icon> {{cancelButtonLabel}}</ion-button>
+    <ion-button (click)="confirm()" > <ion-icon name="checkmark" size="medium"></ion-icon> {{confirmButtonLabel}}</ion-button>
+  </div>
+
+</ion-card>

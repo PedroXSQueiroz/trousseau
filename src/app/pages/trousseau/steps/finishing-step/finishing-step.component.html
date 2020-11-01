@@ -1,0 +1,60 @@
+<ion-content>
+
+  <ion-item *ngIf="trousseau && !trousseau.isFinished">
+    
+    <ion-label>Selecione um Item</ion-label>
+    
+    <ion-select (ionChange)="selectItem($event.target.value)">
+      <ion-select-option 
+        *ngFor="let flatItem of itens" 
+        [value]="flatItem">
+        {{flatItem.item.name}}
+      </ion-select-option>
+    </ion-select>
+  
+    <ion-select #quantitySelect (ionChange)="selectQuantity($event.target.value)" hidden>
+      <ion-select-option *ngFor="let currentQuantity of currentItemQuantity" [value]="currentQuantity">
+        {{currentQuantity}}
+      </ion-select-option>
+    </ion-select>
+
+  </ion-item>
+  
+  
+  <ion-list >
+    
+    <ion-list-header>
+      <ion-label>Item</ion-label>
+      <ion-label>Quantidade</ion-label>
+      <ion-label *ngIf="trousseau && trousseau.isFinished">Diferenca</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of ( ( trousseau && trousseau.isFinished && trousseauItens) || selectedItens )"
+              [color]="getDiff(item) > 0 ? 'danger' : ''">
+      
+      <ion-label>
+        {{item.name}}
+      </ion-label>
+
+      <ion-select *ngIf="trousseau && !trousseau.isFinished"  [value]="getQuantityOfItem(item)" (ionChange)="addItem(item, $event.target.value)">
+        <ion-select-option *ngFor="let currentQuantity of getArrayQuantitiesOftItem(item)" [value]="currentQuantity">
+          {{currentQuantity}}
+        </ion-select-option>
+
+        <ion-select-option [value]="0">
+          ROMOVER
+        </ion-select-option>
+      </ion-select>
+
+      <ion-label *ngIf="trousseau && trousseau.isFinished">
+        {{getQuantityOfTrousseauItem(item)}}
+      </ion-label>
+
+      <ion-label *ngIf="trousseau && trousseau.isFinished">
+        {{getDiff(item)}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+

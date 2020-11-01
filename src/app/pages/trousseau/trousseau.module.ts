@@ -9,6 +9,11 @@ import { TrousseauPageRoutingModule } from './trousseau-routing.module';
 import { TrousseauPage } from './trousseau.page';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatStepperModule } from "@angular/material/stepper";
+import { InitStepComponent } from './steps/init-step/init-step.component';
+import { StepContainerComponent } from './steps/step-container/step-container.component';
+import { SendingStepComponent } from './steps/sending-step/sending-step.component';
+import { ReceivingStepComponent } from './steps/receiving-step/receiving-step.component';
+import { FinishingStepComponent } from './steps/finishing-step/finishing-step.component';
 
 @NgModule({
   imports: [
@@ -19,6 +24,14 @@ import { MatStepperModule } from "@angular/material/stepper";
     NgSelectModule,
     MatStepperModule
   ],
-  declarations: [TrousseauPage]
+  declarations: [
+    TrousseauPage,
+    StepContainerComponent,
+    InitStepComponent,
+    SendingStepComponent,
+    ReceivingStepComponent,
+    FinishingStepComponent
+  ],
+
 })
 export class TrousseauPageModule {}
