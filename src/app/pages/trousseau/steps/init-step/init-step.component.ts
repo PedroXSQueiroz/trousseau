@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Host, Input, OnInit, ViewChild } from '@angular/core';
-import { IonSelect } from '@ionic/angular';
+import { AlertController, IonSelect } from '@ionic/angular';
 import { TrousseauStatus } from 'src/app/contants/trousseau-status';
 import FlatItem from 'src/app/dtos/flat-item';
 import Flat from 'src/app/models/flat';
@@ -38,7 +38,8 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
   @Input() flatCode:string;
 
   constructor(@Host() container:StepContainerComponent,
-              private _trousseauService:TrousseauService) 
+              private _trousseauService:TrousseauService,
+              private _alertController:AlertController) 
   {
     super(container, _trousseauService, true);
   }
@@ -48,7 +49,23 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
   }
   
   async confirm() {
+    
+    if(this._trousseau.itens.size == 0)
+    {
+      let alert = await this._alertController.create({
+        header: 'Atencão',
+        message: 'O Enxoval precisa ter pelo menos um item',
+        buttons: ['OK']
+      });
+
+      await alert.present();
+
+      return false;
+    }
+    
     await this.initTrousseau();
+    
+    return true;
   }
   
   getCancelLabel(): string {

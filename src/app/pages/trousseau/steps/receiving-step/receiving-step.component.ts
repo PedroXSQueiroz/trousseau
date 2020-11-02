@@ -19,6 +19,8 @@ export class ReceivingStepComponent extends StepTrousseauContent implements OnIn
   }
   async confirm() {
     await this.receiveTrousseau();
+
+    return true;
   }
   
   // cancel() {

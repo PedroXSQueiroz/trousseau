@@ -10,12 +10,27 @@ ion-card{
         bottom: 0;
         position: absolute;
         width: 100%;
-        padding: 0.25rem;
+        padding: 0 25%;
         
-        ion-button{
-            --border-radius:50px;
-            width: 30%
+        div{
+
+            display: flex;
+            flex-flow: column;
+            text-align: center;
+            margin-top: -1.5rem;
+            align-items: center;
+
+            ion-fab-button{
+                width: 2.5rem;
+                height: 2.5rem;
+                --box-shadow:none;
+            }
+
+            ion-label{
+                margin-top: 0.5rem;
+            }
         }
+
     }
 
 }

@@ -20,6 +20,8 @@ export class SendingStepComponent extends StepTrousseauContent implements OnInit
 
   async confirm() {
     await this.sendTrousseau();
+
+    return true;
   }
   
   // async cancel() {

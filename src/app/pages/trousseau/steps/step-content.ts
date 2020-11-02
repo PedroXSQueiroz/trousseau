@@ -16,11 +16,11 @@ export default abstract class StepContent implements AfterContentInit, OnChanges
         // container.setShowFinhishButtonsFlag(this.showFinishButtons());
 
         container.setConfirCallback(async () => {
-            await this.confirm();
+            return await this.confirm();
         });
 
         container.setCancelCallback(async () => {
-            await this.cancel();
+            return await this.cancel();
         });
 
         container.setCancelLabel(this.getCancelLabel());
@@ -38,7 +38,7 @@ export default abstract class StepContent implements AfterContentInit, OnChanges
 
     abstract showFinishButtons():boolean;
     
-    abstract confirm();
+    abstract confirm(): Promise<Boolean>;
 
     abstract cancel();
     

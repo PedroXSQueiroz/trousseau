@@ -57,3 +57,16 @@
 ::ng-deep .mat-vertical-stepper-header{
     pointer-events: none !important;
 }
+
+::ng-deep .mat-step-icon{
+    height: 2rem !important;
+    width: 2rem !important;
+}
+
+::ng-deep .mat-vertical-content-container {
+    margin-left: 40px !important;
+}
+
+::ng-deep .mat-step-label {
+    font-size: 18px !important;
+}

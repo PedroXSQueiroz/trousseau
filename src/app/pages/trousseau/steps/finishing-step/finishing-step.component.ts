@@ -53,6 +53,8 @@ export class FinishingStepComponent extends StepTrousseauContent implements OnIn
   
   async confirm() {
     await this.finishTrousseau();
+
+    return true;
   }
   
   // cancel() {

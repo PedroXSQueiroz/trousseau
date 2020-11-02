@@ -11,20 +11,24 @@ export class StepContainerComponent implements OnInit {
   
   @Input() steps: MatStepper
   
-  private _cancelCallback:() => Promise<void>;
+  private _cancelCallback:() => Promise<Boolean>;
 
   public async cancel()
   {
     await this._cancelCallback();
   }
   
-  private _confirmCallback:() => Promise<void>;
+  private _confirmCallback:() => Promise<Boolean>;
 
   public async confirm()
   {
-    await this._confirmCallback();
+    let shouldContinue = await this._confirmCallback();
 
-    this.next();
+    if(shouldContinue)
+    {
+      this.next();
+    }
+
   }
 
   public next()
@@ -66,11 +70,11 @@ export class StepContainerComponent implements OnInit {
       this._cancelLabel = cancelLabel;
   }
 
-  setCancelCallback(cancelCallback:() => Promise<void>) {
+  setCancelCallback(cancelCallback:() => Promise<Boolean>) {
     this._cancelCallback = cancelCallback;
   }
 
-  setConfirCallback(confirmCallback:() => Promise<void>) {
+  setConfirCallback(confirmCallback:() => Promise<Boolean>) {
       this._confirmCallback = confirmCallback; 
   }
 
