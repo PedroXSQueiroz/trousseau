@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Host, Input, OnInit, ViewChild } from '@angular/core';
-import { IonSelect } from '@ionic/angular';
+import { AlertController, IonSelect } from '@ionic/angular';
 import { TrousseauStatus } from 'src/app/contants/trousseau-status';
 import FlatItem from 'src/app/dtos/flat-item';
 import Item from 'src/app/models/item';
@@ -42,6 +42,7 @@ export class FinishingStepComponent extends StepTrousseauContent implements OnIn
 
   constructor(@Host() container:StepContainerComponent,
               private _trousseauService:TrousseauService,
+              private _alertController:AlertController,
               private _changeDetector: ChangeDetectorRef) 
   {
     super(container, _trousseauService);
@@ -93,13 +94,45 @@ export class FinishingStepComponent extends StepTrousseauContent implements OnIn
 
   private _currentSelectedItem:FlatItem;
 
-  async selectItem(flatItem:FlatItem)
+  async selectItem()
   {
-    this._currentSelectedItem = flatItem;
+    // this._currentSelectedItem = flatItem;
     
-    await this.quantitySelect.open();
+    // // await this.quantitySelect.open();
     
-    this._currentItemQuantity = this.getArrayQuantitiesOfFlatItem(flatItem);
+    // this._currentItemQuantity = this.getArrayQuantitiesOfFlatItem(flatItem);
+
+    if(!this._currentSelectedItem)
+    {
+      return;
+    }
+    
+    let currentItemQuantity = this.getArrayQuantitiesOfFlatItem(this._currentSelectedItem);
+
+    let quantityPicker = await this._alertController.create({
+      header: 'Quantas unidades deste item?',
+      inputs: currentItemQuantity.map(quantity => {
+        return {
+          name: 'quantity',
+          value: quantity,
+          label: quantity.toString(),
+          type: 'radio'
+        }
+      }),
+      buttons:[
+        'CANCELAR',
+        {
+          text:'OK',
+          handler: (quantity) => {
+            this.selectQuantity(quantity);
+            this._currentSelectedItem = null;
+          }
+        }
+      ]
+    });
+
+
+    await quantityPicker.present();
   }
 
   private getArrayQuantitiesOftItem(item:Item)
@@ -134,10 +167,10 @@ export class FinishingStepComponent extends StepTrousseauContent implements OnIn
     let itemIndex = this._itens.findIndex( item => item == this._currentSelectedItem );
     this._itens.splice(itemIndex, 1);
 
-    this._currentItemQuantity = null;
-    this._currentSelectedItem = null;
+    // this._currentItemQuantity = null;
+    // this._currentSelectedItem = null;
 
-    this._currentSelectedQuantity = null;
+    // this._currentSelectedQuantity = null;
   }
 
   get selectedItens():Item[]
@@ -212,7 +245,7 @@ export class FinishingStepComponent extends StepTrousseauContent implements OnIn
 
     if( !diffQuantity )
     {
-      return '---';
+      return 0;
     }
     
     return ( diffQuantity > 0 ? '+' : '-' ) + Math.abs( diffQuantity );

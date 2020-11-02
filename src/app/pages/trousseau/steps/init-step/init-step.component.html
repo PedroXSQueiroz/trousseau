@@ -12,11 +12,11 @@
       </ion-select-option>
     </ion-select>
   
-    <ion-select #quantitySelect [(ngModel)]="currentSelectedQuantity" (ionChange)="selectQuantity($event.target.value)" hidden>
+    <!-- <ion-select #quantitySelect [(ngModel)]="currentSelectedQuantity" (ionChange)="selectQuantity($event.target.value)" hidden>
       <ion-select-option *ngFor="let currentQuantity of currentItemQuantity" [value]="currentQuantity">
         {{currentQuantity}}
       </ion-select-option>
-    </ion-select>
+    </ion-select> -->
 
   </ion-item>
   

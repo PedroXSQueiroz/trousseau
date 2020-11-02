@@ -78,14 +78,6 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
 
   ngOnInit() 
   {
-    console.log(this.itens);
-  }
-
-  private _currentItemQuantity:number[] = [];
-
-  get currentItemQuantity(): number[]
-  {
-    return this._currentItemQuantity;
   }
 
   get currentSelectedItem():FlatItem
@@ -100,13 +92,40 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
 
   private _currentSelectedItem:FlatItem;
 
-  async selectItem(flatItem:FlatItem)
+  async selectItem()
   {
-    this._currentSelectedItem = flatItem;
     
-    await this.quantitySelect.open();
+    if(!this._currentSelectedItem)
+    {
+      return;
+    }
     
-    this._currentItemQuantity = this.getArrayQuantitiesOfFlatItem(flatItem);
+    let currentItemQuantity = this.getArrayQuantitiesOfFlatItem(this._currentSelectedItem);
+
+    let quantityPicker = await this._alertController.create({
+      header: 'Quantas unidades deste item?',
+      inputs: currentItemQuantity.map(quantity => {
+        return {
+          name: 'quantity',
+          value: quantity,
+          label: quantity.toString(),
+          type: 'radio'
+        }
+      }),
+      buttons:[
+        'CANCELAR',
+        {
+          text:'OK',
+          handler: (quantity) => {
+            this.selectQuantity(quantity);
+            this._currentSelectedItem = null;
+          }
+        }
+      ]
+    });
+
+
+    await quantityPicker.present();
   }
 
   private getArrayQuantitiesOftItem(item:Item)
@@ -122,29 +141,12 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
   
   }
 
-  private _currentSelectedQuantity: number;
-
-  get currentSelectedQuantity():number
-  {
-    return this._currentSelectedQuantity;
-  }
-
-  set currentSelectedQuantity(quantity:number)
-  {
-    this._currentSelectedQuantity = quantity;
-  }
-
   selectQuantity(quantity:number)
   {
     this._trousseau.addItem(this._currentSelectedItem.item, quantity);
 
     let itemIndex = this._itens.findIndex( item => item == this._currentSelectedItem );
     this._itens.splice(itemIndex, 1);
-
-    this._currentItemQuantity = null;
-    this._currentSelectedItem = null;
-
-    this._currentSelectedQuantity = null;
   }
 
   get selectedItens():Item[]

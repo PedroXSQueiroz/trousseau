@@ -4,7 +4,7 @@
     
     <ion-label>Selecione um Item</ion-label>
     
-    <ion-select (ionChange)="selectItem($event.target.value)" >
+    <ion-select (ionChange)="selectItem($event.target.value)" [(ngModel)]="currentSelectedItem" >
       <ion-select-option 
         *ngFor="let flatItem of itens" 
         [value]="flatItem">
@@ -12,12 +12,6 @@
       </ion-select-option>
     </ion-select>
   
-    <ion-select #quantitySelect (ionChange)="selectQuantity($event.target.value)" [(ngModel)]="currentSelectedQuantity" hidden>
-      <ion-select-option *ngFor="let currentQuantity of currentItemQuantity" [value]="currentQuantity">
-        {{currentQuantity}}
-      </ion-select-option>
-    </ion-select>
-
   </ion-item>
   
   
@@ -30,7 +24,7 @@
     </ion-list-header>
 
     <ion-item *ngFor="let item of ( ( trousseau && trousseau.isFinished && trousseauItens) || selectedItens )"
-              [color]="getDiff(item) > 0 ? 'danger' : ''">
+              [color]="getDiff(item) != 0 ? 'danger' : ''">
       
       <ion-label>
         {{item.name}}
@@ -51,7 +45,7 @@
       </ion-label>
 
       <ion-label *ngIf="trousseau && trousseau.isFinished">
-        {{getDiff(item)}}
+        {{getDiff(item) || '---'}}
       </ion-label>
     </ion-item>
   </ion-list>

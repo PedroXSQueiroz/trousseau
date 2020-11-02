@@ -46,8 +46,6 @@ export class TrousseauService implements Resolve<Trousseau> {
   async saveTrousseauOnFLat(flatCode:string, trousseau:Trousseau):Promise<Trousseau>
   {
 
-    console.log(JSON.stringify(trousseau))
-
     let trousseauSrc = await this._httpClient.post<Trousseau>(`${environment.apiHost}/flats/${flatCode}/trousseau`, trousseau.toDto()).toPromise();
 
     const trousseauSaved:Trousseau = this._trousseauTypeUtils.fromAny(trousseauSrc);
