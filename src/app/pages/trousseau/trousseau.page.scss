@@ -46,14 +46,15 @@
     height: 38vh;
 }
 
+ion-header{
+    ion-toolbar.sub{
+        ion-title{
+            font-size: 18px;
+        }
+    }
+}
+
 @import '~@angular/material/theming';
-
-// @mixin custom-stepper-theme() {
-//   .mat-horizontal-stepper-header {
-//     pointer-events: none;
-//   }
-// }
-
 ::ng-deep .mat-vertical-stepper-header{
     pointer-events: none !important;
 }
@@ -69,4 +70,8 @@
 
 ::ng-deep .mat-step-label {
     font-size: 18px !important;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected{
+    background-color: #3880ff !important;
 }
