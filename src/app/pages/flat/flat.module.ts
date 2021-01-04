@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FlatPageRoutingModule } from './flat-routing.module';
 
 import { FlatPage } from './flat.page';
+import { ProfileComponent } from '../../shared-components/profile/profile.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { FlatPage } from './flat.page';
     IonicModule,
     FlatPageRoutingModule
   ],
-  declarations: [FlatPage]
+  declarations: [
+    FlatPage,
+    ProfileComponent
+  ]
 })
 export class FlatPageModule {}

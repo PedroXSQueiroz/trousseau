@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { FlatsPageRoutingModule } from './flats-routing.module';
 
 import { FlatsPage } from './flats.page';
+import { ProfileComponent } from '../../shared-components/profile/profile.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FlatsPageRoutingModule
+    FlatsPageRoutingModule    
   ],
-  declarations: [FlatsPage]
+  declarations: [
+    FlatsPage,
+    ProfileComponent
+  ]
 })
 export class FlatsPageModule {}

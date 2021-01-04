@@ -17,9 +17,10 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
-  },   {
+  },   
+  {
     path: 'flats',
     loadChildren: () => import('./pages/flats/flats.module').then( m => m.FlatsPageModule)
   },
@@ -54,6 +55,14 @@ const routes: Routes = [
     },
     loadChildren: () => import('./pages/flat/flat.module').then( m => m.FlatPageModule)
     
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
   }
 
 ];

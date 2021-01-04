@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicStorageModule } from '@ionic/storage';
@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatStepperModule} from "@angular/material/stepper";
+import { ServerInterceptorService } from './services/server-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import { MatStepperModule} from "@angular/material/stepper";
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerInterceptorService, multi:true }
   ],
   bootstrap: [AppComponent]
 })

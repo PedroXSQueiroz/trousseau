@@ -1,0 +1,37 @@
+.form-submition
+{
+    display: flex;
+    justify-content: space-around;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    padding: 2rem;
+
+    div{
+
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+        margin-top: -1.5rem;
+        align-items: center;
+
+        ion-fab-button{
+            width: 2.5rem;
+            height: 2.5rem;
+            --box-shadow:none;
+        }
+
+        ion-label{
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+ion-item{
+
+    ion-label{
+        text-align: right;
+        flex: 0 0 8rem;
+    }
+
+}
