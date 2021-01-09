@@ -4,6 +4,9 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { AuthenticationService } from './services/authentication.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -13,15 +16,24 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private _autenticationService: AuthenticationService,
+    private _router: Router 
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    
+    this.platform.ready().then( async () => {
       this.statusBar.styleDefault();
+      
+      this._autenticationService.updateToken( await this._autenticationService.getCurrentToken() );
+          
+      this._router.navigate(['/home']);
+
       this.splashScreen.hide();
     });
+
   }
 }

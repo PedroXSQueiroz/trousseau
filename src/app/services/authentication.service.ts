@@ -27,9 +27,10 @@ export class AuthenticationService {
     
     let tokenDto:TokenDto = await this.login(email, password);
 
+    const token = tokenDto.token;
+    this.updateToken(token);
+    
     await this._storage.set( 'token', tokenDto.token );
-
-    AuthenticationService._CURRENT_TOKEN = tokenDto.token;
 
   }
   
@@ -38,4 +39,14 @@ export class AuthenticationService {
     return await this._httpClient.post<TokenDto>(`${environment.apiHost}/auth/`, {login: email, password: password}).toPromise();
   
   }
+  
+  updateToken(token: string) {
+    AuthenticationService._CURRENT_TOKEN = token;
+  }
+
+  async getCurrentToken():Promise<string>
+  {
+    return AuthenticationService._CURRENT_TOKEN || await this._storage.get('token');
+  }
 }
+
