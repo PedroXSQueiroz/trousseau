@@ -31,6 +31,18 @@
 
     </div>
 
+    <div *ngIf="!isNew">
+
+      <ion-item>
+        <ion-button (click)="showPasswordUpdateModal()"> Redefinir Senha </ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-button (click)="logout()"> Logout </ion-button>
+      </ion-item>
+
+    </div>
+
     <div class="form-submition">
       
       <div>

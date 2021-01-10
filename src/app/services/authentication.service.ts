@@ -48,5 +48,9 @@ export class AuthenticationService {
   {
     return AuthenticationService._CURRENT_TOKEN || await this._storage.get('token');
   }
-}
 
+  async updatePassword(password: String) {
+    await this._httpClient.put( `${environment.apiHost}/user/password`, { newPassword: password } ).toPromise();
+  }
+
+}

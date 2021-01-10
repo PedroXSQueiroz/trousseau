@@ -2,9 +2,10 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { User } from 'src/app/models/user';
 import UserService from 'src/app/services/user.service';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 @Component({
   selector: 'app-user',
@@ -28,9 +29,10 @@ export class UserPage implements OnInit {
               private _userService:     UserService,
               private _alertController: AlertController,
               private _router:          Router,
-              private _navController:   NavController) 
+              private _navController:   NavController,
+              private _modalController: ModalController) 
   { 
-    this.user = this._route.snapshot.data.user || new User();
+    this.user = this._route.snapshot.data._loggedUser || new User();
 
     this.userForm = this._formsBuilder.group({
       email: new FormControl('', [
@@ -63,13 +65,32 @@ export class UserPage implements OnInit {
 
   }
 
+  async showPasswordUpdateModal()
+  {
+    let updatePasswordModal = await this._modalController.create({
+      component: UpdatePasswordComponent,
+      componentProps: {
+        'userId': this.user.id
+      }
+    });
+
+    updatePasswordModal.present();
+  }
+
   async save()
   {
     
     try
     {
-      await this._userService.save(this.user);
-  
+      if(this.isNew)
+      {
+        await this._userService.save(this.user);
+      }
+      else
+      {
+        await this._userService.update(this.user);
+      }
+
       ( 
         await this._alertController.create({
           header: 'Sucesso',
@@ -84,7 +105,7 @@ export class UserPage implements OnInit {
           ]
         }) 
       ).present();
-
+     
     }catch(e)
     {
       ( 

@@ -11,7 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatStepperModule} from "@angular/material/stepper";
@@ -26,6 +26,7 @@ import { ServerInterceptorService } from './services/server-interceptor.service'
       AppRoutingModule, 
       MatStepperModule,
       FormsModule,
+      ReactiveFormsModule,
       IonicStorageModule.forRoot(),
       HttpClientModule,
       BrowserAnimationsModule],

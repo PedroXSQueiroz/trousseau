@@ -6,6 +6,7 @@ import { TrousseauService } from './services/trousseau.service';
 import { FlatResolverService } from './pages/flat/resolver/flat-resolver.service';
 import { TrousseauByIdResolverService } from './pages/trousseau/resolver/trousseau-by-id-resolver.service';
 import { ItensFlatOfTrousseauResolverService } from './pages/trousseau/resolver/itens-flat-of-trousseau-resolver.service';
+import { LoggedUserService } from './resolvers/logged-user/logged-user.service';
 
 const routes: Routes = [
   {
@@ -62,6 +63,9 @@ const routes: Routes = [
   },
   {
     path: 'user',
+    resolve: {
+      _loggedUser: LoggedUserService
+    },
     loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
   }
 
