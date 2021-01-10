@@ -26,4 +26,8 @@ export default class  UserService {
   
   }
 
+  async deleteAccount() {
+    await this._http.delete(`${environment.apiHost}/user/`).toPromise();
+  }
+
 }

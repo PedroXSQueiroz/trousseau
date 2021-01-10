@@ -10,6 +10,10 @@ import TokenDto from '../dtos/token';
 })
 export class AuthenticationService {
   
+  isAuthenticated(): boolean {
+    return !!AuthenticationService._CURRENT_TOKEN;
+  }
+  
   private static  _CURRENT_TOKEN:string;
   
   static get CURRENT_TOKEN():string
@@ -17,8 +21,8 @@ export class AuthenticationService {
     return AuthenticationService._CURRENT_TOKEN;
   }
   
-  constructor(private _httpClient: HttpClient,
-              private _storage:Storage) 
+  constructor(private _httpClient:  HttpClient,
+              private _storage:     Storage) 
   { 
     
   }
@@ -53,4 +57,10 @@ export class AuthenticationService {
     await this._httpClient.put( `${environment.apiHost}/user/password`, { newPassword: password } ).toPromise();
   }
 
+  async logout() {
+    
+    AuthenticationService._CURRENT_TOKEN = null;
+
+    await this._storage.remove('token');
+  }
 }

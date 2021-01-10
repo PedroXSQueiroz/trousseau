@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { User } from 'src/app/models/user';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import UserService from 'src/app/services/user.service';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 
@@ -24,13 +25,14 @@ export class UserPage implements OnInit {
 
   public userForm: FormGroup;
   
-  constructor(private _route:           ActivatedRoute,
-              private _formsBuilder:    FormBuilder,
-              private _userService:     UserService,
-              private _alertController: AlertController,
-              private _router:          Router,
-              private _navController:   NavController,
-              private _modalController: ModalController) 
+  constructor(private _route:                 ActivatedRoute,
+              private _formsBuilder:          FormBuilder,
+              private _userService:           UserService,
+              private _alertController:       AlertController,
+              private _router:                Router,
+              private _navController:         NavController,
+              private _modalController:       ModalController,
+              private _authenticationService: AuthenticationService) 
   { 
     this.user = this._route.snapshot.data._loggedUser || new User();
 
@@ -85,6 +87,7 @@ export class UserPage implements OnInit {
       if(this.isNew)
       {
         await this._userService.save(this.user);
+        await this._authenticationService.authenticate(this.user.email, this.userForm.get('password').value);
       }
       else
       {
@@ -118,9 +121,22 @@ export class UserPage implements OnInit {
     
   }
 
+  async logout()
+  {
+    await this._authenticationService.logout();
+    this._router.navigate(['/login']);
+  }
+
   async cancel()
   {
     this._navController.back();
+  }
+
+  async deleteAccount()
+  {
+    await this._userService.deleteAccount();
+    await this._authenticationService.logout();
+    this._router.navigate(['/login']);
   }
 
   ngOnInit() {
