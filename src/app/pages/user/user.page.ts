@@ -26,20 +26,20 @@ export class UserPage implements OnInit {
 
   public userForm: FormGroup;
 
-  private _errorMessages = {
+  public errorMessages = {
     name: [
-      {type: 'required', message: 'Nome é exigido'}
+      {type: 'required', message: 'O campo Nome é obrigatório!'}
     ],
     email:[
-      {type: 'required', message: 'Email é exigido'},
-      {type: 'email', message: 'Email escrito de forma incorreta'}
+      {type: 'required', message: 'O campo Email é obrigatório!'},
+      {type: 'email', message: 'O campo Email está preenchido de forma incorreta!'}
     ],
     password: [
-      {type: 'required', message: 'Senha é exigida'},
+      {type: 'required', message: 'O campo Senha é obrigatório!'},
       {type: 'pattern', message: 'Senha deve conter ao menos um dos os caracteres especiais'}
     ],
     confirmPassword: [
-      {type: 'passwordConfirmationValid', message: 'Senhas não conferem' }
+      {type: 'passwordConfirmationValid', message: 'Senhas não conferem!' }
     ]
   }
   
@@ -155,11 +155,6 @@ export class UserPage implements OnInit {
     await this._userService.deleteAccount();
     await this._authenticationService.logout();
     this._router.navigate(['/login']);
-  }
-
-  public getFieldErrors(filedName:string): string[]
-  { 
-    return MessagesUtils.getMessageErrorForm(this._errorMessages[filedName],this.userForm, filedName, true);
   }
 
   ngOnInit() {

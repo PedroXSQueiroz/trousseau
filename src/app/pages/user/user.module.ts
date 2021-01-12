@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UserPageRoutingModule } from './user-routing.module';
 
 import { UserPage } from './user.page';
+import { ErrorsContainerComponent } from 'src/app/shared-components/errors-container/errors-container.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { UserPage } from './user.page';
     ReactiveFormsModule,
     UserPageRoutingModule
   ],
-  declarations: [UserPage]
+  declarations: [UserPage,ErrorsContainerComponent]
 })
 export class UserPageModule {}
