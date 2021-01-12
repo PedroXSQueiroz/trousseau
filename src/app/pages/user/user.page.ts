@@ -6,6 +6,7 @@ import { AlertController, ModalController, NavController } from '@ionic/angular'
 import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import UserService from 'src/app/services/user.service';
+import { MessagesUtils } from 'src/app/utils/messages-utils';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 @Component({
@@ -24,6 +25,23 @@ export class UserPage implements OnInit {
   }
 
   public userForm: FormGroup;
+
+  private _errorMessages = {
+    name: [
+      {type: 'required', message: 'Nome é exigido'}
+    ],
+    email:[
+      {type: 'required', message: 'Email é exigido'},
+      {type: 'email', message: 'Email escrito de forma incorreta'}
+    ],
+    password: [
+      {type: 'required', message: 'Senha é exigida'},
+      {type: 'pattern', message: 'Senha deve conter ao menos um dos os caracteres especiais'}
+    ],
+    confirmPassword: [
+      {type: 'passwordConfirmationValid', message: 'Senhas não conferem' }
+    ]
+  }
   
   constructor(private _route:                 ActivatedRoute,
               private _formsBuilder:          FormBuilder,
@@ -50,7 +68,7 @@ export class UserPage implements OnInit {
         Validators.required,
         Validators.pattern(/[!|@|#|$|%|^|&|*|\?]+/)
       ]));
-      this.userForm.addControl( 'confirm-password' ,new FormControl('', [
+      this.userForm.addControl( 'confirmPassword' ,new FormControl('', [
         Validators.required,
         (control:FormControl) => {
           
@@ -137,6 +155,11 @@ export class UserPage implements OnInit {
     await this._userService.deleteAccount();
     await this._authenticationService.logout();
     this._router.navigate(['/login']);
+  }
+
+  public getFieldErrors(filedName:string): string[]
+  { 
+    return MessagesUtils.getMessageErrorForm(this._errorMessages[filedName],this.userForm, filedName, true);
   }
 
   ngOnInit() {

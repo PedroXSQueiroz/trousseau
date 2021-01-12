@@ -10,11 +10,19 @@
     <ion-item>
       <ion-label position="fixed">Nome:</ion-label>
       <ion-input [(ngModel)]="user.name" formControlName="name" ></ion-input>
+
+      <ion-chip *ngFor="let error of getFieldErrors('name')" color="danger" >
+        <ion-label>{{error}}</ion-label>
+      </ion-chip>
     </ion-item>
 
     <ion-item>
       <ion-label position="fixed">Email:</ion-label>
       <ion-input [(ngModel)]="user.email" formControlName="email" ></ion-input>
+
+      <ion-chip *ngFor="let error of getFieldErrors('email')" color="danger" >
+        <ion-label>{{error}}</ion-label>
+      </ion-chip>
     </ion-item>
 
     <div *ngIf="isNew">
@@ -22,11 +30,19 @@
       <ion-item>
         <ion-label position="fixed">Senha:</ion-label>
         <ion-input [(ngModel)]="user.password" formControlName="password" ></ion-input>
+
+        <ion-chip *ngFor="let error of getFieldErrors('password')" color="danger" >
+          <ion-label>{{error}}</ion-label>
+        </ion-chip>
       </ion-item>
 
       <ion-item>
         <ion-label position="fixed">Confimar senha:</ion-label>
-        <ion-input formControlName="confirm-password" ></ion-input>
+        <ion-input formControlName="confirmPassword" ></ion-input>
+
+        <ion-chip *ngFor="let error of getFieldErrors('confirmPassword')" color="danger" >
+          <ion-label>{{error}}</ion-label>
+        </ion-chip>
       </ion-item>
 
     </div>
@@ -57,7 +73,7 @@
       </div>
       
       <div>
-        <ion-fab-button (click)="save()" >
+        <ion-fab-button (click)="save()" [disabled]="!userForm.valid" >
           <ion-icon name="checkmark"></ion-icon>
         </ion-fab-button>
         <ion-label>Confirmar</ion-label>
