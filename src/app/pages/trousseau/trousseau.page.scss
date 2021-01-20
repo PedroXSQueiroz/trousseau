@@ -54,6 +54,11 @@ ion-header{
     }
 }
 
+.completed-step-icon
+{
+    font-size: 1.25rem;
+}
+
 @import '~@angular/material/theming';
 ::ng-deep .mat-vertical-stepper-header{
     pointer-events: none !important;

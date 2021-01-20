@@ -25,7 +25,7 @@
 <ion-content>
   
   <mat-vertical-stepper #steps>
-    <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.INITIAL)" >
+    <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.INITIAL)">
       <ng-template matStepLabel> Iniciando </ng-template>
 
       <step-container [steps]="steps">
@@ -64,6 +64,11 @@
       </step-container>
 
     </mat-step>
+
+    <ng-template matStepperIcon="edit">
+      <ion-icon name="checkmark" size="medium" class="completed-step-icon" ></ion-icon>
+    </ng-template>
+   
 
   </mat-vertical-stepper>
 
