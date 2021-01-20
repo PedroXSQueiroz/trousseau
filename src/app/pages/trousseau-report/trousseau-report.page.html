@@ -128,7 +128,7 @@
             <td *ngIf="getQuantity(item) === 0" class="value empty"> --- </td>
             <td *ngIf="getQuantity(item) > 0" class="value"> 
               <div>
-                <span>R$</span> <span> {{ getTotalValueItem(item).toFixed(2)}} </span>
+                <span>R$</span> <span> {{ item.value.toFixed(2) }} </span>
               </div>
             </td>
   

@@ -71,6 +71,11 @@ export class TrousseauPage implements OnInit {
     return TrousseauStatus.getLabel(this._trousseau.status);
   }
 
+  get isInitiated():boolean
+  {
+    return !!this._trousseau.status;
+  }
+
   report()
   {
     this._navController.navigateForward(`trousseau-report/${this._trousseau.id}`, {
