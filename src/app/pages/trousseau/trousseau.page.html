@@ -17,7 +17,8 @@
 
   <ion-toolbar class="sub" >
     <ion-title size="medium" slot="start" >Flat: {{flatCode}} {{ trousseau.id && ' > ' + trousseau.id.toString().padStart(5, '0') }}</ion-title>
-    <ion-title size="medium" slot="end" >{{statusMessage}}</ion-title>
+    <!-- <ion-title size="medium" slot="end" >{{statusMessage}}</ion-title> -->
+    <status-label [trousseau]="trousseau" slot="end"></status-label>
   </ion-toolbar>
 
 </ion-header>

@@ -2,6 +2,7 @@ import Item from './item';
 import { TrousseauStatus } from '../contants/trousseau-status';
 import Flat from './flat';
 import DtoParseable from './dto-parseable';
+import { TrousseauFail } from '../contants/trousseau-fail';
 
 export default class Trousseau implements DtoParseable
 {
@@ -48,6 +49,7 @@ export default class Trousseau implements DtoParseable
         private _itens: { ['item']:Item , ['quantity']:number } [] = [],
         private _diff: { ['item']:Item , ['quantity']:number } [] = [],
         private _status:TrousseauStatus = null,
+        private _fail:TrousseauFail = null,
         private _id:string = null)
     {
 
@@ -206,6 +208,16 @@ export default class Trousseau implements DtoParseable
     set status(status:TrousseauStatus)
     {
         this._status = status;
+    }
+
+    get fail(): TrousseauFail
+    {
+        return this._fail;
+    }
+
+    set fail(fail:TrousseauFail)
+    {
+        this._fail = fail;
     }
 
     get date():Date

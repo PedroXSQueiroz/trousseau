@@ -14,6 +14,7 @@ import { StepContainerComponent } from './steps/step-container/step-container.co
 import { SendingStepComponent } from './steps/sending-step/sending-step.component';
 import { ReceivingStepComponent } from './steps/receiving-step/receiving-step.component';
 import { FinishingStepComponent } from './steps/finishing-step/finishing-step.component';
+import { StatusLabelComponent } from 'src/app/shared-components/status-label/status-label.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { FinishingStepComponent } from './steps/finishing-step/finishing-step.co
     InitStepComponent,
     SendingStepComponent,
     ReceivingStepComponent,
-    FinishingStepComponent
+    FinishingStepComponent,
+    StatusLabelComponent
   ],
 
 })
