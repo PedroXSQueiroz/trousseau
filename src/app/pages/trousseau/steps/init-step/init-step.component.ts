@@ -128,8 +128,13 @@ export class InitStepComponent extends StepTrousseauContent implements OnInit {
     await quantityPicker.present();
   }
 
-  private getArrayQuantitiesOftItem(item:Item)
+  private getArrayQuantitiesOftItem(item:Item):number[]
   {
+    if(this._trousseau.status)
+    {
+      return [];
+    }
+    
     let flatItem = this._originalItens.find( flatItem => flatItem.item.id == item.id );
 
     return this.getArrayQuantitiesOfFlatItem(flatItem);

@@ -3,7 +3,8 @@ export default class Item
     constructor(
             public name:string = null, 
             public value:number = null,
-            public id:number = null)
+            public id:number = null,
+            public itemCode:number = null)
     {
 
     }

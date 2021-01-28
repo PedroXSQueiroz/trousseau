@@ -25,6 +25,23 @@ export class TrousseauReportPage implements OnInit {
     return this._trousseau;
   }
 
+  public getTrousseauItem(item:Item):Item
+  {
+    let itensIterator = this._trousseau.itens.keys();
+
+    let currentItem:Item = null;
+
+    while((currentItem = itensIterator.next().value) )
+    {
+      if(item.itemCode == currentItem.itemCode)
+      {
+        return currentItem;
+      }
+    }
+
+    return null;
+  }
+
   public getQuantity(item:Item):number
   {
     
@@ -34,7 +51,7 @@ export class TrousseauReportPage implements OnInit {
 
     while((currentItem = itensIterator.next().value) )
     {
-      if(item.id == currentItem.id)
+      if(item.itemCode == currentItem.itemCode)
       {
         return this._trousseau.itens.get(currentItem);
       }
