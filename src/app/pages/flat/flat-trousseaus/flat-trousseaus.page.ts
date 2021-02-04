@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TrousseauStatus } from 'src/app/contants/trousseau-status';
 import Trousseau from 'src/app/models/trousseau';
+import { TrousseausToFlatResolverService } from 'src/app/resolvers/trousseus-to-flat/trousseaus-to-flat-resolver.service';
 
 @Component({
   selector: 'app-flat-trousseaus',
@@ -26,6 +27,11 @@ export class FlatTrousseausPage implements OnInit {
   {
     this._trousseaus = this._route.snapshot.data._trousseaus;
     this.flatCode = this._router.url.match(/flat\/([0-9]+)\/flat-trousseaus/)[1];
+
+    TrousseausToFlatResolverService.onReloadFlats.subscribe( (trousseaus:Trousseau[]) => 
+    {   
+      this._trousseaus = trousseaus;
+    });
   }
 
   public getStatusLabel(status:TrousseauStatus):string

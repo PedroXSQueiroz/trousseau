@@ -35,7 +35,7 @@
         <ion-item-options slot="left">
           <ion-buttons>
             
-            <ion-button icon-only [routerLink]="'/trousseau/' + trousseau.id" routerDirection="forward" >
+            <ion-button icon-only [routerLink]="'/trousseau/' + trousseau.id" routerDirection="forward" skipLocationChange="false">
               <ion-icon name="play-forward-outline" *ngIf="!isFinished(trousseau)"></ion-icon>
               <ion-icon name="eye-outline" *ngIf="isFinished(trousseau)" ></ion-icon>
             </ion-button>

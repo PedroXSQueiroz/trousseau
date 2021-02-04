@@ -40,8 +40,8 @@ export class ServerInterceptorService implements HttpInterceptor {
           if(error.status == 403)
           {
             let alert = this._alertController.create({
-              header: 'Atenćão',
-              message: 'Aplicativo não autenticado, por favor,faća novamente o login',
+              header: 'Atenção',
+              message: 'Aplicativo não autenticado, por favor,faça novamente o login',
               buttons:[
                 {
                   text: 'OK',
