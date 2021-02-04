@@ -8,9 +8,9 @@
         <ion-label position="fixed">Email</ion-label>
         <ion-input formControlName="email" [(ngModel)]="email" ></ion-input>
         
-        <ion-chip *ngFor="let error of getFieldErrors('email')" color="danger" >
+        <!-- <ion-chip *ngFor="let error of getFieldErrors('email')" color="danger" >
           <ion-label>{{error}}</ion-label>
-        </ion-chip>
+        </ion-chip> -->
 
       </ion-item>
   
@@ -18,12 +18,14 @@
         <ion-label position="fixed">Password</ion-label>
         <ion-input formControlName="password" [(ngModel)]="password" type="password" ></ion-input>
         
-        <ion-chip *ngFor="let error of getFieldErrors('password')" color="danger" >
+        <!-- <ion-chip *ngFor="let error of getFieldErrors('password')" color="danger" >
           <ion-label>{{error}}</ion-label>
-        </ion-chip>
+        </ion-chip> -->
       
       </ion-item>
   
+      <errors-container [form]="loginForm" [errors]="errorMessages" ></errors-container>    
+      
       <ion-button (click)="login()" [disabled]="!loginForm.valid"> LOGIN </ion-button>
   
       <ion-button [routerLink]="'/user/'" routerDirection="forward" > Register </ion-button>

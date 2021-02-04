@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
 
   public password:string;
 
-  private _errorMessages = {
+  public errorMessages = {
     email:[
       {type: 'required', message: 'Email é exigido' }
     ],
@@ -28,6 +28,7 @@ export class LoginPage implements OnInit {
       {type: 'required', message: 'Senha é exigido'}
     ]
   };
+
   
   constructor(private _formBuilder:FormBuilder,
               private _authService: AuthenticationService,
@@ -48,7 +49,7 @@ export class LoginPage implements OnInit {
 
   getFieldErrors(fieldName:string)
   {
-    return MessagesUtils.getMessageErrorForm(this._errorMessages[fieldName], this.loginForm, fieldName, true );
+    return MessagesUtils.getMessageErrorForm(this.errorMessages[fieldName], this.loginForm, fieldName, true );
   }
 
   ngOnInit() {
