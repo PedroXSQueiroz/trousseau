@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/models/user';
+import User from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { environment } from 'src/environments/environment';
 

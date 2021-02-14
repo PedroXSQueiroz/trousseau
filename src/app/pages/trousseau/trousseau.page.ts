@@ -6,6 +6,7 @@ import { NavController } from '@ionic/angular';
 import { __spreadArrays } from 'tslib';
 import FlatItem from 'src/app/dtos/flat-item';
 import { FormBuilder } from '@angular/forms';
+import TrousseauLog from 'src/app/models/trousseau-log';
 
 @Component({
   selector: 'app-trousseau',
@@ -83,6 +84,18 @@ export class TrousseauPage implements OnInit {
         trousseau: this._trousseau.id
       }
     })
+  }
+
+  getStepLogData(status: TrousseauStatus)
+  {
+    if(!this._trousseau.logs)
+    {
+      return null;
+    }
+    
+    let log:TrousseauLog = this._trousseau.logs.find( log => log.status == status );
+
+    return log ? `${log.user.name} | ${log.registerDate.toLocaleDateString('pt-br')}` : null
   }
 
 }

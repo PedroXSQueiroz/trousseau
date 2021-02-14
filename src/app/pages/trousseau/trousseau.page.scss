@@ -75,6 +75,13 @@ ion-header{
 
 ::ng-deep .mat-step-label {
     font-size: 18px !important;
+    width: 100% !important;
+    .trousseau-log
+    {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
 }
 
 ::ng-deep .mat-step-header .mat-step-icon-selected{

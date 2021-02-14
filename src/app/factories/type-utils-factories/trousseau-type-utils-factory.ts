@@ -3,6 +3,8 @@ import TypeUtilsFactory from '../type-utils-factory';
 import Trousseau from 'src/app/models/trousseau';
 import Item from 'src/app/models/item';
 import Flat from 'src/app/models/flat';
+import TrousseauLogUtilsFactory from './trousseau-log-utils-factory';
+import TrousseauLog from 'src/app/models/trousseau-log';
 
 export default class TrousseauTypeUtilsFactory implements TypeUtilsFactory<Trousseau>
 {
@@ -11,6 +13,7 @@ export default class TrousseauTypeUtilsFactory implements TypeUtilsFactory<Trous
         const tuItem:TypeUtils<Item> = new TypeUtils<Item>(Item);
         const tuFlat:TypeUtils<Flat> = new TypeUtils<Flat>(Flat);
         const tuTrousseau:TypeUtils<Trousseau> = new TypeUtils<Trousseau>(Trousseau);
+        const tuLog:TypeUtils<TrousseauLog> = new TrousseauLogUtilsFactory().build();
 
         const buildItensList: (propValue: any) => any = (propValue) => {
             
@@ -35,6 +38,8 @@ export default class TrousseauTypeUtilsFactory implements TypeUtilsFactory<Trous
             
             return itens;
         };
+
+
         
         tuTrousseau.remapProperty('diff', '_diff');
 
@@ -49,6 +54,13 @@ export default class TrousseauTypeUtilsFactory implements TypeUtilsFactory<Trous
             return tuFlat.fromAny(propValue);
 
         })
+
+        tuTrousseau.registerCustomSettingField('logs', (propValue) => {
+
+            const logs = propValue.map(currentPropValue => tuLog.fromAny(currentPropValue));
+            return logs ;
+
+        });
 
         
 

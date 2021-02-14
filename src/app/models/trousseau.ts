@@ -1,6 +1,7 @@
 import Item from './item';
 import { TrousseauStatus } from '../contants/trousseau-status';
 import Flat from './flat';
+import TrousseauLog from './trousseau-log';
 import DtoParseable from './dto-parseable';
 import { TrousseauFail } from '../contants/trousseau-fail';
 
@@ -50,6 +51,7 @@ export default class Trousseau implements DtoParseable
         private _diff: { ['item']:Item , ['quantity']:number } [] = [],
         private _status:TrousseauStatus = null,
         private _fail:TrousseauFail = null,
+        private _logs: TrousseauLog[] = null,
         private _id:string = null)
     {
 
@@ -243,6 +245,16 @@ export default class Trousseau implements DtoParseable
     get isFinished():boolean
     {
         return TrousseauStatus.isFinished(this.status);
+    }
+
+    get logs():TrousseauLog[]
+    {
+        return this._logs;
+    }
+
+    set logs(logs: TrousseauLog[])
+    {
+        this._logs = logs;
     }
 
     public alreadyCompleted(status: TrousseauStatus):boolean

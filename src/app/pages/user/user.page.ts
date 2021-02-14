@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
-import { User } from 'src/app/models/user';
+import User from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import UserService from 'src/app/services/user.service';
 import { MessagesUtils } from 'src/app/utils/messages-utils';

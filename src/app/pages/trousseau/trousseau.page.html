@@ -27,7 +27,12 @@
   
   <mat-vertical-stepper #steps>
     <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.INITIAL)">
-      <ng-template matStepLabel> Iniciando </ng-template>
+      <ng-template matStepLabel> 
+        <div class="trousseau-log" >
+          <span>Iniciando</span>
+          <span>{{ getStepLogData( TrousseauStatus.INITIAL ) }}</span>
+        </div>
+      </ng-template>
 
       <step-container [steps]="steps">
         <init-step 
@@ -40,7 +45,12 @@
     </mat-step>
 
     <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.SENT)">
-      <ng-template matStepLabel> Enviando </ng-template>
+      <ng-template matStepLabel> 
+        <div class="trousseau-log" >
+          <span>Eviando</span>
+          <span>{{ getStepLogData( TrousseauStatus.SENT ) }}</span>
+        </div> 
+      </ng-template>
       
       <step-container [steps]="steps" >
         <sending-step [trousseau]="trousseau" [status]="TrousseauStatus.SENT"></sending-step>
@@ -49,7 +59,12 @@
     </mat-step>
 
     <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.RETRIEVED)">
-      <ng-template matStepLabel> Recebendo </ng-template>
+      <ng-template matStepLabel> 
+        <div class="trousseau-log" >
+          <span>Recebendo</span>
+          <span>{{ getStepLogData( TrousseauStatus.RETRIEVED ) }}</span>
+        </div> 
+      </ng-template>
 
       <step-container [steps]="steps" >
         <receiving-step [trousseau]="trousseau" [status]="TrousseauStatus.RETRIEVED"></receiving-step>
@@ -58,7 +73,12 @@
     </mat-step>
 
     <mat-step [completed]="trousseau.alreadyCompleted(TrousseauStatus.OK) || trousseau.alreadyCompleted(TrousseauStatus.NOT_OK)">
-      <ng-template matStepLabel> Finalizando </ng-template>
+      <ng-template matStepLabel> 
+      <div class="trousseau-log" >
+          <span>Finalizando</span>
+          <span>{{ getStepLogData( TrousseauStatus.OK ) || getStepLogData( TrousseauStatus.NOT_OK ) }}</span>
+        </div> 
+      </ng-template>
 
       <step-container [steps]="steps" >
         <finishing-step [itens]="itens" [trousseau]="trousseau"></finishing-step>
