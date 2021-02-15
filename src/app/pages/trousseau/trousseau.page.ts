@@ -95,7 +95,7 @@ export class TrousseauPage implements OnInit {
     
     let log:TrousseauLog = this._trousseau.logs.find( log => log.status == status );
 
-    return log ? `${log.user.name} | ${log.registerDate.toLocaleDateString('pt-br')}` : null
+    return log ? `${log.user.name} | ${log.registerDate.toLocaleDateString('pt-br')} ${log.registerDate.toLocaleTimeString('pt-br')}` : null
   }
 
 }
